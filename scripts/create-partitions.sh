@@ -21,4 +21,4 @@ sudo mkfs.fat -F 32 -n boot /dev/$1p3
 sudo mount /dev/disk/by-label/nixos /mnt
 sudo mkdir -p /mnt/boot
 sudo mount /dev/disk/by-label/boot /mnt/boot
-swapon /dev/$1p2
+sudo swapon /dev/$1p2
