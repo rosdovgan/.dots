@@ -1,0 +1,3 @@
+{
+  DOTS = "$HOME/.dots";
+}

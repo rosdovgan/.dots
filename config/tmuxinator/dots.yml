@@ -1,0 +1,8 @@
+name: dots
+root: <%= ENV["DOTS"] %>
+windows:
+  - editor:
+      layout: even-horizontal
+      panes:
+        - clear
+        - clear
