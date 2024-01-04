@@ -45,20 +45,6 @@
   };
   services.screen-locker.xautolock.enable = false;
 
-  services.sxhkd = { 
-    enable = true;
-    keybindings = {
-      "XF86MonBrightnessUp" = "brillo -A 25";
-      "XF86MonBrightnessDown" = "brillo -U 25";
-      "XF86AudioRaiseVolume" = "pactl -- set-sink-volume 0 +10%";
-      "XF86AudioLowerVolume" = "pactl -- set-sink-volume 0 -10%";
-      "XF86AudioMute" = "pactl set-sink-mute 0 toggle";
-      # "super + l" = "xdg-screensaver activate";
-      "Print" = "flameshot gui";
-      "shift + Print" = "gpick -s";
-    };
-  };
-
   services.network-manager-applet.enable = true;
   services.blueman-applet.enable = true;
 

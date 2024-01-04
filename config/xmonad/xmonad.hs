@@ -6,6 +6,7 @@ import Data.Either (fromRight)
 import Data.Ini (lookupValue, readIniFile)
 import qualified Data.Map as M
 import qualified Data.Text as T
+import Graphics.X11.ExtraTypes.XF86
 import System.Directory (XdgDirectory (..), getXdgDirectory)
 import System.Environment (getArgs)
 import System.FilePath ((</>))
@@ -123,11 +124,18 @@ myKeys conf@(XConfig {XMonad.modMask = mm}) =
       ++ [
            -- mod-[1..9] %! Switch to workspace N
            -- mod-shift-[1..9] %! Move client to workspace N
-           ( (m .|. mm, k),
-             windows $ f i
-           )
+           ((m .|. mm, k), windows $ f i)
            | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9],
              (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]
+         ]
+      ++ [ ((0, xF86XK_MonBrightnessUp), brightnessUp),
+           ((0, xF86XK_MonBrightnessDown), brightnessDown),
+           ((0, xF86XK_AudioRaiseVolume), raiseVolume),
+           ((0, xF86XK_AudioLowerVolume), lowerVolume),
+           ((0, xF86XK_AudioMute), muteVolume),
+           -- ((mm, xK_l), spawn "xdg-screensaver activate"),
+           ((0, xK_Print), spawn "flameshot gui"),
+           ((shiftMask, xK_Print), spawn "gpick -s")
          ]
   where
     openDotfiles = runInTerm "" "tmuxinator start dots"
@@ -144,6 +152,12 @@ myKeys conf@(XConfig {XMonad.modMask = mm}) =
           executeFile (cacheDir dirs </> compiledConfig) False args Nothing
 
     compiledConfig = printf "xmonad-%s-%s" arch os
+
+    brightnessUp = spawn "brillo -A 25"
+    brightnessDown = spawn "brillo -U 25"
+    raiseVolume = spawn "pactl -- set-sink-volume 0 +10%"
+    lowerVolume = spawn "pactl -- set-sink-volume 0 -10%"
+    muteVolume = spawn "pactl set-sink-mute 0 toggle"
 
 myMouseBindings :: XConfig Layout -> M.Map (KeyMask, Button) (Window -> X ())
 myMouseBindings (XConfig {XMonad.modMask = mm}) =
