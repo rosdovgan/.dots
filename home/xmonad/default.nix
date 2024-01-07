@@ -6,7 +6,6 @@
     enable = true;
     initExtra = ''
       xsetroot -solid "${colors.pureBlack}"
-      xsetroot -cursor_name left_ptr
     '';
 
     windowManager.xmonad = {

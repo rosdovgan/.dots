@@ -4,7 +4,7 @@
     
     ./nix-ld ./logind ./zsh
 
-    ./xorg ./xmonad ./sddm
+    ./xorg ./xmonad ./lightdm
 
     ./binfmt
 
