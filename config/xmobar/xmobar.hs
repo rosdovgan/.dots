@@ -3,8 +3,7 @@ import Data.Ini (lookupValue, readIniFile)
 import Data.List (intercalate)
 import qualified Data.Text as T
 import System.Directory (XdgDirectory (..), getXdgDirectory)
-import Xmobar hiding (bgColor, fgColor)
-import qualified Xmobar as Config (Config (..))
+import Xmobar
 
 main :: IO ()
 main = do
@@ -29,11 +28,11 @@ config color fontStyle =
           fontStyle "main8",
           fontStyle "main16"
         ],
-      Config.bgColor = color "darkBlack",
-      Config.fgColor = color "pureWhite",
+      bgColor = color "darkBlack",
+      fgColor = color "pureWhite",
       overrideRedirect = True,
       lowerOnStart = True,
-      position = TopHM 28 0 0 2 0,
+      position = TopHM 30 0 0 0 0,
       sepChar = [mySepChar],
       commands = myCommands color,
       template = myTemplate color
