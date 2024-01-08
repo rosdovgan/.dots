@@ -29,7 +29,6 @@ import XMonad.Hooks.ManageDocks
     docks,
     manageDocks,
   )
--- import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.PerWindowKbdLayout (perWindowKbdLayout)
 import XMonad.Hooks.SetWMName (setWMName)
 import XMonad.Hooks.StatusBar (defToggleStrutsKey, statusBarProp, withEasySB)
@@ -133,15 +132,16 @@ myKeys conf@(XConfig {XMonad.modMask = mm}) =
            ((0, xF86XK_AudioRaiseVolume), raiseVolume),
            ((0, xF86XK_AudioLowerVolume), lowerVolume),
            ((0, xF86XK_AudioMute), muteVolume),
+           ((0, xF86XK_PowerOff), toggleBrightness),
            -- ((mm, xK_l), spawn "xdg-screensaver activate"),
            ((0, xK_Print), spawn "flameshot gui"),
            ((shiftMask, xK_Print), spawn "gpick -s")
          ]
   where
+    getScriptPath x = getXdgDirectory XdgConfig ("user/scripts/" ++ x)
     openDotfiles = runInTerm "" "tmuxinator start dots"
-    toggleConky =
-      liftIO (getXdgDirectory XdgConfig "user/scripts/toggle-conky.sh")
-        >>= spawn
+    toggleConky = liftIO (getScriptPath "toggle-conky.sh") >>= spawn
+    toggleBrightness = liftIO (getScriptPath "toggle-brightness.sh") >>= spawn
 
     compileRestart resume = do
       dirs <- asks directories
@@ -180,9 +180,7 @@ myLayoutHook = toggleLayouts (avoidStruts Full) (avoidStruts $ tiled ||| Mirror 
     ratio = 1 / 2
     delta = 3 / 100
 
-myManageHook =
-  manageDocks
-    -- <+> composeOne [className =? "Conky" -?> doCenterFloat]
+myManageHook = manageDocks
 
 myLogHook :: X ()
 myLogHook = fadeWindowsLogHook myFadeHook
