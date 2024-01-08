@@ -25,15 +25,6 @@
         system = "x86_64-linux";
         modules = [
           { nixpkgs.overlays = [ nur.overlay ]; }
-          ({ pkgs, ... }:
-            let
-              nur-no-pkgs = import nur {
-                nurpkgs = import nixpkgs { system = "x86_64-linux"; };
-              };
-            in {
-              imports = [ nur-no-pkgs.repos.iopq.modules.xraya  ];
-              services.xraya.enable = true;
-            })
           ./system/hardware-configuration.nix { 
             _module.args = { 
               r = /.; 
