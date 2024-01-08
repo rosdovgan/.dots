@@ -5,6 +5,8 @@
       init = {
         defaultBranch = "main";
       };
+
+      core.askPass = "";
     };
   };
 }
