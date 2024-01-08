@@ -1,5 +1,5 @@
 { pkgs, c, colors, ... }: {
-  home.packages = with pkgs; [ xdotool ];
+  home.packages = with pkgs; [ xdotool pulseaudio playerctl ];
 
   services.picom.enable = true;
   xsession = {

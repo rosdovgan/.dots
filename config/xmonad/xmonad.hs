@@ -117,7 +117,6 @@ myKeys conf@(XConfig {XMonad.modMask = mm}) =
       ((mm, xK_r), compileRestart True),
       ((mm, xK_b), sendMessage ToggleStruts),
       ((mm, xK_m), toggleConky)
-      -- "$HOME/.config/user/scripts/toggle-conky.sh"
       -- ((mm, xK_m), allNamedScratchpadAction myScratchpads "conky")
     ]
       ++ [
@@ -132,6 +131,10 @@ myKeys conf@(XConfig {XMonad.modMask = mm}) =
            ((0, xF86XK_AudioRaiseVolume), raiseVolume),
            ((0, xF86XK_AudioLowerVolume), lowerVolume),
            ((0, xF86XK_AudioMute), muteVolume),
+           ((0, xF86XK_AudioPlay), audioPlay),
+           ((0, xF86XK_AudioStop), audioStop),
+           ((0, xF86XK_AudioNext), audioNext),
+           ((0, xF86XK_AudioPrev), audioPrev),
            ((0, xF86XK_PowerOff), toggleBrightness),
            -- ((mm, xK_l), spawn "xdg-screensaver activate"),
            ((0, xK_Print), spawn "flameshot gui"),
@@ -155,9 +158,15 @@ myKeys conf@(XConfig {XMonad.modMask = mm}) =
 
     brightnessUp = spawn "brillo -A 25"
     brightnessDown = spawn "brillo -U 25"
+
     raiseVolume = spawn "pactl -- set-sink-volume 0 +10%"
     lowerVolume = spawn "pactl -- set-sink-volume 0 -10%"
     muteVolume = spawn "pactl set-sink-mute 0 toggle"
+
+    audioPlay = spawn "playerctl play"
+    audioStop = spawn "playerctl pause"
+    audioNext = spawn "playerctl next"
+    audioPrev = spawn "playerctl previous"
 
 myMouseBindings :: XConfig Layout -> M.Map (KeyMask, Button) (Window -> X ())
 myMouseBindings (XConfig {XMonad.modMask = mm}) =

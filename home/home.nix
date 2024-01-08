@@ -20,7 +20,7 @@
   home.packages = with pkgs; [ 
     nix-index  
     lshw hwinfo dmidecode lm_sensors xorg.xwininfo xclip xkb-switch
-    pavucontrol pulseaudio pulseaudio-ctl alsa-utils
+    pavucontrol alsa-utils
     vlc gimp notepadqq peazip cinnamon.xreader
     ungoogled-chromium
     htop qbittorrent keepassxc 
