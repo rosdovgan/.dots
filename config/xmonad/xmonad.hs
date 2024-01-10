@@ -116,7 +116,9 @@ myKeys conf@(XConfig {XMonad.modMask = mm}) =
       ((mm, xK_q), restart "xmonad" True),
       ((mm, xK_r), compileRestart True),
       ((mm, xK_b), sendMessage ToggleStruts),
-      ((mm, xK_m), toggleConky)
+      ((mm, xK_m), toggleConky),
+      ((mm, xK_bracketleft), translateSelection "ukrainian"),
+      ((mm, xK_bracketright), translateSelection "english")
       -- ((mm, xK_m), allNamedScratchpadAction myScratchpads "conky")
     ]
       ++ [
@@ -141,10 +143,13 @@ myKeys conf@(XConfig {XMonad.modMask = mm}) =
            ((shiftMask, xK_Print), spawn "gpick -s")
          ]
   where
-    getScriptPath x = getXdgDirectory XdgConfig ("user/scripts/" ++ x)
+    runUserScript name args =
+      let getScriptPath x = getXdgDirectory XdgConfig ("user/scripts/" ++ x)
+       in liftIO (getScriptPath $ name ++ ' ' : unwords args) >>= spawn
     openDotfiles = runInTerm "" "tmuxinator start dots"
-    toggleConky = liftIO (getScriptPath "toggle-conky.sh") >>= spawn
-    toggleBrightness = liftIO (getScriptPath "toggle-brightness.sh") >>= spawn
+    toggleConky = runUserScript "toggle-conky.sh" []
+    toggleBrightness = runUserScript "toggle-brightness.sh" []
+    translateSelection lang = runUserScript "translate-selection.sh" [lang]
 
     compileRestart resume = do
       dirs <- asks directories
