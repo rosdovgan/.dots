@@ -3,22 +3,23 @@ import Data.Ini (lookupValue, readIniFile)
 import Data.List (intercalate)
 import qualified Data.Text as T
 import System.Directory (XdgDirectory (..), getXdgDirectory)
-import Xmobar
+import Xmobar hiding (name)
 
 main :: IO ()
 main = do
   iniPath <- getXdgDirectory XdgConfig "user/user.ini"
   ini <- fromRight mempty <$> readIniFile iniPath
+  userScriptsDir <- getXdgDirectory XdgConfig "user/scripts/"
   let getValue section def key =
         T.unpack . fromRight (T.pack def) $
           lookupValue (T.pack section) (T.pack key) ini
       color = getValue "colors" "#ff00ff"
       fontStyle = getValue "fonts" "-misc-fixed-*-*-*-*-12-*-*-*-*-*-*-*"
 
-  configFromArgs (config color fontStyle) >>= xmobar
+  configFromArgs (config color fontStyle userScriptsDir) >>= xmobar
 
-config :: (String -> String) -> (String -> String) -> Config
-config color fontStyle =
+config :: (String -> String) -> (String -> String) -> FilePath -> Config
+config color fontStyle userScriptsDir =
   defaultConfig
     { font = fontStyle "main12",
       additionalFonts =
@@ -35,14 +36,14 @@ config color fontStyle =
       position = TopHM 30 0 0 0 0,
       sepChar = [mySepChar],
       commands = myCommands color,
-      template = myTemplate color
+      template = myTemplate color userScriptsDir
     }
 
 mySepChar :: Char
 mySepChar = '§'
 
-myTemplate :: (String -> String) -> String
-myTemplate color = "}" ++ left ++ "{" ++ right
+myTemplate :: (String -> String) -> FilePath -> String
+myTemplate color userScriptsDir = "}" ++ left ++ "{" ++ right
   where
     left = intercalate "  " [lg]
     right =
@@ -67,15 +68,15 @@ myTemplate color = "}" ++ left ++ "{" ++ right
     lg = fn 2 $ tc "UnsafeXMonadLog"
     net = tc "dynnetwork"
     brightness =
-      action "brillo -A 25" "4"
-        . action "brillo -U 25" "5"
+      action (notifyBrightness "brillo -A 25") "4"
+        . action (notifyBrightness "brillo -U 25") "5"
         . tc
         $ "bright"
 
     volume =
-      action "pactl -- set-sink-volume 0 +10%" "4"
-        . action "pactl -- set-sink-volume 0 -10%" "5"
-        . action "pactl set-sink-mute 0 toggle" "2"
+      action (notifyVolume "pactl -- set-sink-volume 0 +10%") "4"
+        . action (notifyVolume "pactl -- set-sink-volume 0 -10%") "5"
+        . action (notifyVolume "pactl set-sink-mute 0 toggle") "2"
         . action "pavucontrol" "1"
         . tc
         $ "alsa:default:Master"
@@ -90,6 +91,19 @@ myTemplate color = "}" ++ left ++ "{" ++ right
         . fn 5
         $ "\xf0425"
     tray = fc (color "lighterBlack") $ tc "_XMONAD_TRAYPAD"
+
+    notifyVolume cmd =
+      unwords
+        [ cmd,
+          "&&",
+          userScriptsDir ++ "notify-sound-volume-level.sh"
+        ]
+    notifyBrightness cmd =
+      unwords
+        [ cmd,
+          "&&",
+          userScriptsDir ++ "notify-brightness-level.sh"
+        ]
 
 myCommands :: (String -> String) -> [Runnable]
 myCommands color = Run UnsafeXMonadLog : monitors

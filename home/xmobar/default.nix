@@ -7,10 +7,7 @@ let
   ]);
 in
 {
-  home.packages = [ ghcWithPkgs ];
-
-  # xdg.configFile."xmobar/scripts/padding-icon.sh".source = 
-  #   /${c}/config/xmobar/scripts/padding-icon.sh;
+  home.packages = with pkgs; [ libnotify ghcWithPkgs ];
 
   programs.xmobar = {
     enable = true;

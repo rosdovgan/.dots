@@ -128,11 +128,11 @@ myKeys conf@(XConfig {XMonad.modMask = mm}) =
            | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9],
              (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]
          ]
-      ++ [ ((0, xF86XK_MonBrightnessUp), brightnessUp),
-           ((0, xF86XK_MonBrightnessDown), brightnessDown),
-           ((0, xF86XK_AudioRaiseVolume), raiseVolume),
-           ((0, xF86XK_AudioLowerVolume), lowerVolume),
-           ((0, xF86XK_AudioMute), muteVolume),
+      ++ [ ((0, xF86XK_MonBrightnessUp), brightnessUp >> notifyBrightness),
+           ((0, xF86XK_MonBrightnessDown), brightnessDown >> notifyBrightness),
+           ((0, xF86XK_AudioRaiseVolume), raiseVolume >> notifyVolume),
+           ((0, xF86XK_AudioLowerVolume), lowerVolume >> notifyVolume),
+           ((0, xF86XK_AudioMute), muteVolume >> notifyVolume),
            ((0, xF86XK_AudioPlay), audioPlay),
            ((0, xF86XK_AudioStop), audioStop),
            ((0, xF86XK_AudioNext), audioNext),
@@ -150,6 +150,9 @@ myKeys conf@(XConfig {XMonad.modMask = mm}) =
     toggleConky = runUserScript "toggle-conky.sh" []
     toggleBrightness = runUserScript "toggle-brightness.sh" []
     translateSelection lang = runUserScript "translate-selection.sh" [lang]
+
+    notifyVolume = runUserScript "notify-sound-volume-level.sh" []
+    notifyBrightness = runUserScript "notify-brightness-level.sh" []
 
     compileRestart resume = do
       dirs <- asks directories
