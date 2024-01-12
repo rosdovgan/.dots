@@ -6,7 +6,8 @@
         font = fonts.main12;
         origin = "top-right";
         offset = "0x30";
-        frame_width = 0;
+        frame_width = 1;
+        frame_color = colors.black;
         separator_color = colors.lightGray;
         separator_height = 1;
         padding = 10;
@@ -23,7 +24,6 @@
       };
       urgency_critical = {
         timeout = "30s";
-        frame_width = 1;
         frame_color = colors.red;
       };
     };
