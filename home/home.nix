@@ -55,6 +55,12 @@
     "user/scripts".source = /${c}/user/scripts;
   };
 
+  xsession.initExtra = ''
+    telegram-desktop -startintray &
+    slack -u &
+    webcord -m &
+  '';
+
   home.sessionVariables = {
     DOTS = env.DOTS;
   };
