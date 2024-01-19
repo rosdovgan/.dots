@@ -15,6 +15,8 @@
     ./udiskie
 
     ./conky
+
+    ./gstreamer
   ];
 
   home.packages = with pkgs; [ 
@@ -23,6 +25,7 @@
     pavucontrol alsa-utils
     vlc gimp notepadqq peazip cinnamon.xreader
     ungoogled-chromium
+    # chromium
     htop qbittorrent keepassxc 
     gnome.gnome-clocks
     flatpak bottles virt-manager
