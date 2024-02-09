@@ -8,6 +8,8 @@
 
     ./binfmt
 
+    ./polkit
+
     ./sound ./nvidia ./opengl
 
     ./locate
