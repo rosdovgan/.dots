@@ -13,6 +13,8 @@
     ./locate
 
     ./time-and-locale
+
+    ./virtualisation
     ];
 
   environment.systemPackages = with pkgs; [ 
@@ -34,15 +36,13 @@
     enable = true;
 
     extraPortals = with pkgs; [ 
-      xdg-desktop-portal-gtk 
+      xdg-desktop-portal-gtk
       ];
     config = { common = { default = [ "gtk" ]; }; };
   };
 
   services.thermald.enable = true;
   powerManagement.enable = true;
-
-  virtualisation.libvirtd.enable = true;
 
   services.flatpak.enable = true;
   services.udisks2.enable = true;
@@ -71,7 +71,7 @@
   users.users."${users.main.name}" = {
     isNormalUser = true;
     description = users.main.description;
-    extraGroups = [ "networkmanager" "audio" "video" "wheel" "plocate"];
+    extraGroups = [ "networkmanager" "audio" "video" "wheel" "plocate" ];
     shell = pkgs.zsh;
   };
 

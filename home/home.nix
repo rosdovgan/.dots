@@ -28,7 +28,7 @@
     # chromium
     htop qbittorrent keepassxc 
     gnome.gnome-clocks
-    flatpak bottles virt-manager
+    flatpak bottles
     telegram-desktop slack webcord
     ventoy woeusb
     gpick autokey
@@ -50,6 +50,13 @@
 
   services.network-manager-applet.enable = true;
   services.blueman-applet.enable = true;
+
+  dconf.settings = {
+    "org/virt-manager/virt-manager/connections" = {
+      autoconnect = ["qemu:///system"];
+      uris = ["qemu:///system"];
+    };
+  };
 
   xdg.configFile = {
     "floskell/config.json".source = /${c}/floskell/config.json;
