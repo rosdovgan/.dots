@@ -142,7 +142,7 @@ in
         consent-o-matic
         sidebery
         proton-vpn
-        betterttv
+        # betterttv
         # startpage-private-search
        ];
 
