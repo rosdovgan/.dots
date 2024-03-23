@@ -1,4 +1,18 @@
-{ pkgs, c, user, env, colors, fonts, ... }: {
+{ pkgs, lib, c, user, env, colors, fonts, ... }:
+let
+  # TODO: Come up with something else
+  private = let
+      repo = let env = import ../common/env.const.nix; in
+      builtins.fetchGit {
+      url = "file:///etc/" +  env.DOTS_PRIVATE_DIR;
+      rev = "fc1a7a285755f7b2345e993db6000d5626dc691a";
+    };
+    in
+    path: (lib.optional
+      (builtins.pathExists (repo + path))
+      (repo + path));
+in
+{
   imports = [
     ./gtk ./qt
 
@@ -17,7 +31,7 @@
     ./conky
 
     ./gstreamer
-  ];
+  ] ++ (private "/home/home.nix");
 
   home.packages = with pkgs; [ 
     nix-index  
