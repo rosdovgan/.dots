@@ -153,7 +153,7 @@ in
       extraConfig = lib.readFile (pkgs.fetchurl {
         url =
           "https://raw.githubusercontent.com/yokoffing/Betterfox/main/user.js";
-        hash = "sha256-PH9ZR6U8l5p7hViMyuDliYoTuikdZOqo+PmvsPsBPao=";
+        hash = "sha256-Jc6p8jHCm9B1E8GIoGUOLph5rABgy3ajcWqgxD2/tmc=";
       }) + ''
         user_pref("browser.search.suggest.enabled", true);
         user_pref("browser.newtabpage.enabled", false);
