@@ -1,3 +1,3 @@
 {
-  DOTS = "$HOME/.dots";
+  DOTS_DIR = "/etc/.dots";
 }

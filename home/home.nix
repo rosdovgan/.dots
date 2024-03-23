@@ -72,7 +72,7 @@
   '';
 
   home.sessionVariables = {
-    DOTS = env.DOTS;
+    DOTS_DIR = env.DOTS_DIR;
   };
 
   programs.home-manager.enable = true;
