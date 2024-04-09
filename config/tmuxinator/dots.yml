@@ -1,5 +1,5 @@
 name: dots
-root: <%= ENV["DOTS"] %>
+root: <%= ENV["DOTS_DIR"] %>
 windows:
   - editor:
       layout: even-horizontal
