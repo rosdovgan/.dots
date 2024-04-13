@@ -17,6 +17,7 @@
       slot_size = 30;
       sticky = true;
       window_layer = "bottom";
+      log_level = "info";
     };
   };
 
