@@ -18,7 +18,7 @@ in
 
     ./zsh ./direnv ./git
 
-    ./xmonad ./xmobar ./stalonetray ./rofi ./dunst
+    ./xmonad ./xmobar ./stalonetray ./rofi ./dunst ./betterlockscreen
 
     ./kitty ./nvim ./tmux
 
@@ -53,13 +53,6 @@ in
     # csharp-ls
     ];
 
-  services.betterlockscreen = {
-    enable = true;
-    inactiveInterval = 0;
-    arguments = [
-      "--show-layout"
-    ];
-  };
   services.screen-locker.xautolock.enable = false;
 
   services.network-manager-applet.enable = true;

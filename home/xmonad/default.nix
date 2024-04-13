@@ -7,6 +7,7 @@
     enable = true;
     initExtra = ''
       xsetroot -solid "${colors.pureBlack}"
+      xset -dpms
     '';
 
     windowManager.xmonad = {
