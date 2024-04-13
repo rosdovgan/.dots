@@ -35,7 +35,7 @@ in
 
   home.packages = with pkgs; [ 
     nix-index  
-    lshw hwinfo dmidecode lm_sensors xorg.xwininfo xclip xkb-switch
+    lshw hwinfo dmidecode lm_sensors xorg.xwininfo xclip
     pavucontrol alsa-utils
     vlc gimp notepadqq peazip cinnamon.xreader
     ungoogled-chromium

@@ -7,7 +7,7 @@ let
   ]);
 in
 {
-  home.packages = with pkgs; [ libnotify ghcWithPkgs ];
+  home.packages = with pkgs; [ libnotify ghcWithPkgs xkb-switch ];
 
   programs.xmobar = {
     enable = true;
