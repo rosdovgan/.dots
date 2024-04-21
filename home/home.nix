@@ -48,6 +48,8 @@ in
     gpick autokey
     obs-studio
 
+    calibre
+    dosbox-x
     # ilspycmd
     # dotnet-sdk_7
     # csharp-ls
