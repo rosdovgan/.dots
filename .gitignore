@@ -1,2 +1,3 @@
 config/xmonad/dist-newstyle
 config/xmobar/dist-newstyle
+config/nvim/lazy-lock.json
