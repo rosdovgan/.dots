@@ -1,27 +1,13 @@
 -- Setup language servers.
 local lspconfig = require("lspconfig")
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
+local lspCapabilities = require('cmp_nvim_lsp').default_capabilities()
 
 lspconfig.lua_ls.setup({
   settings = {
     Lua = {
-      runtime = {
-        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-        version = "LuaJIT",
-      },
-      diagnostics = {
-        -- Get the language server to recognize the `vim` global
-        globals = { "vim" },
-      },
-      -- workspace = {
-      --   -- Make the server aware of Neovim runtime files
-      --   library = vim.api.nvim_get_runtime_file("", true),
-      -- },
-      -- Do not send telemetry data containing a randomized but unique identifier
-      telemetry = {
-        enable = false,
-      },
+      runtime = { version = "LuaJIT", },
+      diagnostics = { globals = { "vim" }, },
+      telemetry = { enable = false, },
     },
   },
 })
@@ -29,12 +15,6 @@ lspconfig.lua_ls.setup({
 lspconfig.hls.setup({
   cmd = { "haskell-language-server-wrapper", "--lsp" },
   filetypes = { "haskell", "lhaskell", "cabal" },
-  -- root_dir = function (filepath)
-  --   return (
-  --     util.root_pattern('hie.yaml', 'stack.yaml', 'cabal.project')(filepath)
-  --     or util.root_pattern('*.cabal', 'package.yaml')(filepath)
-  --   )
-  -- end,
   settings = {
     haskell = {
       cabalFormattingProvider = "cabalfmt",
@@ -42,6 +22,20 @@ lspconfig.hls.setup({
     },
   },
   single_file_support = true,
+})
+
+lspconfig.dartls.setup({
+  capabilities = lspCapabilities,
+})
+
+lspconfig.rust_analyzer.setup({
+  settings = {
+    ['rust-analyzer'] = {
+      diagnostics = {
+        enable = false,
+      }
+    }
+  }
 })
 
 lspconfig.tsserver.setup({})
@@ -80,7 +74,7 @@ lspconfig.eslint.setup({
 })
 lspconfig.emmet_ls.setup({})
 lspconfig.cssls.setup({
-  capabilities = capabilities,
+  capabilities = lspCapabilities,
 })
 lspconfig.nil_ls.setup({})
 lspconfig.csharp_ls.setup({})
