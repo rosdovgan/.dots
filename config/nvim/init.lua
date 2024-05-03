@@ -145,6 +145,10 @@ require("lazy").setup({
   { "numToStr/Comment.nvim",
     config = ":TSUpdate",
   },
+
+  -- autopairs
+  { "windwp/nvim-autopairs",
+  },
 })
 
 -------------------------------------------------------------------------------
@@ -163,6 +167,7 @@ local inits = {
   "tmux",
   "ccc",
   "Comment",
+  "autopairs",
 }
 
 for _, v in ipairs(inits) do require("plugins/" .. v) end
