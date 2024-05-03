@@ -107,8 +107,10 @@ require("lazy").setup({
   },
   { "jay-babu/mason-nvim-dap.nvim",
   },
+  { "nvim-neotest/nvim-nio",
+  },
   { "rcarriga/nvim-dap-ui",
-    dependencies = { "mfussenegger/nvim-dap" },
+    dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
   },
 
   -- snippets
