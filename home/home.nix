@@ -4,7 +4,7 @@ let
   private = let
       repo = let env = import ../common/env.const.nix; in
       builtins.fetchGit {
-      url = "file:///etc/" +  env.DOTS_PRIVATE_DIR;
+      url = "file://" +  env.DOTS_PRIVATE_DIR;
       rev = "fc1a7a285755f7b2345e993db6000d5626dc691a";
     };
     in
