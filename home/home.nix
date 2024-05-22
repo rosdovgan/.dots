@@ -16,7 +16,7 @@ in
   imports = [
     ./gtk ./qt
 
-    ./zsh ./direnv ./git
+    ./zsh ./direnv ./git ./fzf
 
     ./xmonad ./xmobar ./stalonetray ./rofi ./dunst ./betterlockscreen
 
@@ -35,6 +35,7 @@ in
 
   home.packages = with pkgs; [ 
     nix-index  
+    fd
     lshw hwinfo dmidecode lm_sensors xorg.xwininfo xclip
     pavucontrol alsa-utils
     vlc gimp notepadqq peazip cinnamon.xreader
