@@ -98,12 +98,12 @@ myKeys conf@(XConfig {XMonad.modMask = mm}) =
       ((mm, xK_n), refresh),
       ((mm, xK_Tab), windows W.focusDown),
       ((mm .|. shiftMask, xK_Tab), windows W.focusUp),
-      ((mm, xK_h), windows W.focusDown),
-      ((mm, xK_l), windows W.focusUp),
+      ((mm, xK_l), windows W.focusDown),
+      ((mm, xK_h), windows W.focusUp),
       -- , ((mm,               xK_m     ), windows W.focusMaster  )
       -- , ((mm,               xK_Return), windows W.swapMaster)
-      ((mm .|. shiftMask, xK_h), windows W.swapDown),
-      ((mm .|. shiftMask, xK_l), windows W.swapUp),
+      ((mm .|. shiftMask, xK_l), windows W.swapDown),
+      ((mm .|. shiftMask, xK_h), windows W.swapUp),
       ((mm, xK_j), sendMessage Shrink),
       ((mm, xK_k), sendMessage Expand),
       ((mm .|. shiftMask, xK_j), sendMessage MirrorShrink),
