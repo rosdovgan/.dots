@@ -183,7 +183,7 @@ myCommands color = Run UnsafeXMonadLog : monitors
       Run $
         Date
           ( concat
-              [ fn 2 "%a %y.%m.%d ",
+              [ fn 2 "%a %d.%m.%y ",
                 sep,
                 (action "gnome-clocks" "1" . fc (color "darkBlue")) " %H:%M"
               ]
