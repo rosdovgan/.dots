@@ -1,6 +1,17 @@
-{ pkgs, c, colors, ... }: {
-  home.packages = 
-    with pkgs; [ yad translate-shell xdotool pulseaudio playerctl ];
+{
+  pkgs,
+  c,
+  colors,
+  ...
+}: {
+  home.packages = with pkgs; [
+    yad
+    translate-shell
+    xdotool
+    pulseaudio
+    playerctl
+    xcwd
+  ];
 
   services.picom.enable = true;
   xsession = {
@@ -14,11 +25,12 @@
       enable = true;
       enableContribAndExtras = true;
       # config = /${c}/config/xmonad/xmonad.hs;
-      extraPackages = haskellPackages: with pkgs.haskellPackages; [ 
-        ini
-        xmobar 
-        # taffybar
-      ];
+      extraPackages = haskellPackages:
+        with pkgs.haskellPackages; [
+          ini
+          xmobar
+          # taffybar
+        ];
     };
   };
 

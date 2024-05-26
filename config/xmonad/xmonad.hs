@@ -87,7 +87,7 @@ myConfig =
 myKeys :: XConfig Layout -> M.Map (KeyMask, KeySym) (X ())
 myKeys conf@(XConfig {XMonad.modMask = mm}) =
   M.fromList $
-    [ ((mm, xK_Return), spawn $ terminal conf),
+    [ ((mm, xK_Return), openTerminal),
       ((mm, xK_d), openDotfiles),
       ((mm, xK_p), spawn "rofi -show drun -show-icons"),
       ((mm .|. shiftMask, xK_p), spawn "rofi -show run -show-icons"),
@@ -175,6 +175,8 @@ myKeys conf@(XConfig {XMonad.modMask = mm}) =
     audioStop = spawn "playerctl pause"
     audioNext = spawn "playerctl next"
     audioPrev = spawn "playerctl previous"
+
+    openTerminal = spawn . unwords $ [terminal conf,"-d", "$(xcwd)"]
 
 myMouseBindings :: XConfig Layout -> M.Map (KeyMask, Button) (Window -> X ())
 myMouseBindings (XConfig {XMonad.modMask = mm}) =
