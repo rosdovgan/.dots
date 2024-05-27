@@ -94,7 +94,7 @@ myKeys conf@(XConfig {XMonad.modMask = mm}) =
       ((mm, xK_w), spawn "rofi -show window"),
       ((mm, xK_c), kill),
       ((mm .|. shiftMask, xK_space), sendMessage NextLayout),
-      ((mm, xK_space), sendMessage ToggleLayout),
+      ((mm, xK_f), sendMessage ToggleLayout),
       ((mm, xK_n), refresh),
       ((mm, xK_Tab), windows W.focusDown),
       ((mm .|. shiftMask, xK_Tab), windows W.focusUp),
