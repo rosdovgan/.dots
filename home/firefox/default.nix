@@ -50,12 +50,25 @@ in
       isDefault = true;
 
       search = {
-        default = "DuckDuckGo";
-        privateDefault = "DuckDuckGo";
+        default = "Qwant";
+        privateDefault = "Qwant";
         force = true;
-        order = [ "DuckDuckGo" "Startpage" ];
+        order = [ "Qwant" "DuckDuckGo" "Startpage" ];
 
         engines = {
+          "Qwant" = {
+            urls = [{
+              template = "https://www.qwant.com";
+              params = [
+                { name = "q"; value = "{searchTerms}"; }
+                { name = "t"; value = "web"; }
+              ];
+            }];
+            iconUpdateURL = "https://www.qwant.com/public/"
+              + "favicon-196.b2a1214ee3c261334512a377f1d678f7.png";
+            updateInterval = 24 * 60 * 60 * 1000; # every day
+            definedAliases = [ "@q" ];
+          };
           "DuckDuckGo".metaData.alias = "@ddg";
           "Startpage" = {
             urls = [{
