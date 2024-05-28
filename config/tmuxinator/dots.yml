@@ -1,8 +1,8 @@
 name: dots
 root: <%= ENV["DOTS_DIR"] %>
 windows:
-  - editor:
-      layout: even-horizontal
+  - main:
+      layout: main-vertical
       panes:
         - clear
         - clear
