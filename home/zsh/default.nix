@@ -8,7 +8,7 @@
     enable = true;
     dotDir = ".config/zsh";
     enableCompletion = true;
-    enableAutosuggestions = true;
+    autosuggestion.enable = true;
     history = {
       size = 100000;
       path = "${config.xdg.dataHome}/zsh/history";

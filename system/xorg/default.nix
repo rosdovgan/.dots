@@ -2,8 +2,8 @@
   services.xserver.enable = true;
   services.xserver.excludePackages = [ pkgs.xterm ];
 
-  services.xserver = {
+  services.xserver.xkb = {
     layout = "us";
-    xkbVariant = "";
+    variant = "";
   };
 }

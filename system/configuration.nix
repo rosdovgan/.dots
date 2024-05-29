@@ -55,7 +55,7 @@
   hardware.brillo.enable = true;
 
   services.xserver.updateDbusEnvironment = true;
-  services.xserver.libinput.enable = true; # Touchpad
+  services.libinput.enable = true; # Touchpad
 
   programs.dconf.enable = true;
   programs.gnupg.agent.enable = true;

@@ -4,7 +4,7 @@
     # style.name = "Adwaita-Dark";
     # platformTheme = "gtk";
     style.name = "kvantum";
-    platformTheme = "qtct";
+    platformTheme.name = "qtct";
   };
 
   xdg.configFile = {
