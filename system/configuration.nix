@@ -1,7 +1,7 @@
 { pkgs, users, ... }: {
-  imports = [ 
+  imports = [
     ./system-packages-list.nix 
-    
+
     ./nix-ld ./logind ./zsh
 
     ./xorg ./xmonad ./lightdm
@@ -19,11 +19,11 @@
     ./virtualisation
     ];
 
-  environment.systemPackages = with pkgs; [ 
+  environment.systemPackages = with pkgs; [
     where-is-my-sddm-theme
-    neovim 
-    wget curl 
-    git  
+    neovim
+    wget curl
+    git
     ];
 
   boot.loader.systemd-boot.enable = true;
@@ -37,7 +37,7 @@
   xdg.portal = {
     enable = true;
 
-    extraPortals = with pkgs; [ 
+    extraPortals = with pkgs; [
       xdg-desktop-portal-gtk
       ];
     config = { common = { default = [ "gtk" ]; }; };
@@ -75,6 +75,12 @@
     description = users.main.description;
     extraGroups = [ "networkmanager" "audio" "video" "wheel" "plocate" ];
     shell = pkgs.zsh;
+  };
+
+  nix.gc = {
+    automatic = true;
+    dates = "monthly";
+    options = "--delete-older-than 3month";
   };
 
   nix.settings.experimental-features = "nix-command flakes";
