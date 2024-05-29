@@ -18,7 +18,7 @@
       fd ripgrep tree-sitter
       trash-cli
       lua-language-server
-      nil
+      nixd
     ];
   };
 }

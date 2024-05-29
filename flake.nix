@@ -1,55 +1,81 @@
 {
-  description = "NixOS configuration";
-
   inputs = {
-    # nixpkgs.url = "github:nixos/nixpkgs/release-23.11";
-    # home-manager.url = "github:nix-community/home-manager/release-23.11";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nur.url = "github:nix-community/NUR";
+    nixd.url = "github:nix-community/nixd";
+    flake-parts.url = "github:hercules-ci/flake-parts";
   };
 
-  outputs = { nixpkgs, home-manager, nur, ... }: 
-  let
-    users = {  
-      main = { name = "owner"; description = "Owner"; };
-    }; 
-    env = import common/env.const.nix;
-    colors = import common/colors.const.nix;
-    fonts = import common/fonts.const.nix;
-  in
-  {
-    nixosConfigurations = {
-      main = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          { nixpkgs.overlays = [ nur.overlay ]; }
-          ./system/hardware-configuration.nix { 
-            _module.args = { 
-              r = /.; 
-              c = ./config; 
-              inherit users env colors fonts; 
-            };
-          }
-          ./system/configuration.nix 
-          home-manager.nixosModules.home-manager {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users."${users.main.name}" = { 
-              _module.args = { 
-                r = /.; 
-                c = ./config; 
-                user = users.main; 
-                inherit env colors fonts; 
+  outputs = inputs @ {
+    nixpkgs,
+    home-manager,
+    flake-parts,
+    ...
+  }:
+    flake-parts.lib.mkFlake {inherit inputs;} {
+      debug = true;
+      systems = ["x86_64-linux"];
+
+      flake = let
+        users = {
+          main = {
+            name = "owner";
+            description = "Owner";
+          };
+        };
+        sharedArgs = {
+          r = /.;
+          c = ./config;
+          env = import common/env.const.nix;
+          colors = import common/colors.const.nix;
+          fonts = import common/fonts.const.nix;
+        };
+
+        overlays = with inputs; [
+          nur.overlay
+          nixd.overlays.default
+        ];
+      in {
+        nixosConfigurations.main = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            {
+              nixpkgs.overlays = overlays;
+              nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
+            }
+
+            ./system/hardware-configuration.nix
+
+            ./system/configuration.nix
+            {
+              _module.args = {inherit users;} // sharedArgs;
+            }
+
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users."${users.main.name}".imports = [./home/home.nix];
+                extraSpecialArgs = {user = users.main;} // sharedArgs;
               };
-              imports = [ ./home/home.nix ];
-            };
-            # Optionally, use home-manager.extraSpecialArgs to pass
-            # arguments to home.nix
-          }
+            }
           ];
+        };
+
+        # This chunk exists only because nixd can't evaluate options
+        # You should't use it
+        homeConfigurations = {
+          main = home-manager.lib.homeManagerConfiguration {
+            pkgs = nixpkgs.legacyPackages.x86_64-linux // {inherit overlays;};
+            extraSpecialArgs = {user = users.main;} // sharedArgs;
+            modules = [./home/home.nix];
+          };
+        };
       };
     };
-  };
 }
