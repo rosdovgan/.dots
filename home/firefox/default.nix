@@ -155,8 +155,7 @@ in
         consent-o-matic
         sidebery
         proton-vpn
-        # betterttv
-        # startpage-private-search
+        betterttv
        ];
 
       settings = lib.attrsets.mergeAttrsList [
