@@ -1,121 +1,163 @@
--- Setup language servers.
+local lhses     = require("mappings").lhses
 local lspconfig = require("lspconfig")
-local lspCapabilities = require('cmp_nvim_lsp').default_capabilities()
+local helpers   = require("helpers")
 
-lspconfig.lua_ls.setup({
-  settings = {
-    Lua = {
-      runtime = { version = "LuaJIT", },
-      diagnostics = { globals = { "vim" }, },
-      telemetry = { enable = false, },
-    },
-  },
+do
+  local signs = require("icons").diagnostic
+  for type, icon in pairs(signs) do
+    local hl = "DiagnosticSign" .. type
+    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+  end
+end
+
+vim.diagnostic.config({
+  virtual_text = false,
+  signs = true,
+  underline = true,
+  update_in_insert = true,
+  severity_sort = true
 })
 
-lspconfig.hls.setup({
+local shared_config = {}
+
+shared_config.capabilities = require("cmp_nvim_lsp").default_capabilities()
+shared_config.capabilities = vim.lsp.protocol.make_client_capabilities()
+shared_config.capabilities.textDocument.foldingRange = {
+  dynamicRegistration = false,
+  lineFoldingOnly = true
+}
+
+shared_config.on_attach = function(client, bufnr)
+  if client.server_capabilities.inlayHintProvider then
+    vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+  end
+
+  vim.api.nvim_create_autocmd("CursorHold", {
+    buffer = bufnr,
+    callback = function()
+      local opts = {
+        focusable = false,
+        close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+        source = "always",
+        prefix = " ",
+        scope = "line"
+      }
+      vim.diagnostic.open_float(nil, opts)
+    end,
+  })
+
+  helpers.set_keymaps({ "n" }, {}, {
+    [lhses.format] = function()
+      vim.lsp.buf.format({
+        async = true,
+        filter = function() return client.name ~= "tsserver" end
+      })
+    end,
+    [lhses.hover] = vim.lsp.buf.hover,
+    [lhses.rename] = vim.lsp.buf.rename
+  })
+end
+
+lspconfig.lua_ls.setup(helpers.merge_tables(shared_config, {
+  settings = {
+    Lua = {
+      runtime = { version = "LuaJIT" },
+      diagnostics = { globals = { "vim" } },
+      telemetry = { enable = false }
+    }
+  }
+}))
+
+lspconfig.bashls.setup(shared_config)
+
+lspconfig.nixd.setup(helpers.merge_tables(shared_config, {
+  settings = {
+    nixd = {
+      nixpkgs = {
+        expr = "import <nixpkgs> { }"
+      },
+      formatting = {
+        command = { "alejandra" }
+      },
+      options = {
+        nixos = {
+          expr =
+          '(builtins.getFlake "/etc/.dots").nixosConfigurations.main.options'
+        },
+        home_manager = {
+          expr =
+          '(builtins.getFlake "/etc/.dots").homeConfigurations.main.options'
+        },
+        flake_parts = {
+          expr = 'let flake = builtins.getFlake ("/etc/.dots"); in '
+              .. 'flake.debug.options // flake.currentSystem.options'
+        }
+      }
+    }
+  }
+}))
+
+lspconfig.hls.setup(helpers.merge_tables(shared_config, {
   cmd = { "haskell-language-server-wrapper", "--lsp" },
   filetypes = { "haskell", "lhaskell", "cabal" },
   settings = {
     haskell = {
       cabalFormattingProvider = "cabalfmt",
-      formattingProvider = "floskell",
-    },
+      formattingProvider = "ormolu"
+    }
   },
-  single_file_support = true,
-})
+  single_file_support = true
+}))
 
-lspconfig.dartls.setup({
-  capabilities = lspCapabilities,
-})
+lspconfig.dartls.setup(shared_config)
 
-lspconfig.rust_analyzer.setup({
+lspconfig.rust_analyzer.setup(helpers.merge_tables(shared_config, {
   settings = {
     ['rust-analyzer'] = {
       diagnostics = {
-        enable = false,
+        enable = false
       }
     }
   }
-})
+}))
 
-lspconfig.tsserver.setup({})
-lspconfig.eslint.setup({
-  codeAction = {
-    disableRuleComment = {
-      enable = true,
-      location = "separateLine"
-    },
-    showDocumentation = {
-      enable = true
-    }
-  },
-  codeActionOnSave = {
-    enable = false,
-    mode = "all"
-  },
-  experimental = {
-    useFlatConfig = false
-  },
-  format = false,
-  nodePath = "",
-  onIgnoredFiles = "off",
-  packageManager = "npm",
-  problems = {
-    shortenToSingleLine = false
-  },
-  quiet = false,
-  rulesCustomizations = {},
-  run = "onType",
-  useESLintClass = false,
-  validate = "on",
-  workingDirectory = {
-    mode = "location"
-  }
-})
-lspconfig.emmet_ls.setup({})
-lspconfig.cssls.setup({
-  capabilities = lspCapabilities,
-})
-lspconfig.nil_ls.setup({})
-lspconfig.csharp_ls.setup({})
+lspconfig.tsserver.setup(shared_config)
 
--- Global mappings.
--- See `:help vim.diagnostic.*` for documentation on any of the below functions
-vim.keymap.set("n", "<space>e", vim.diagnostic.open_float)
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
-vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist)
-
--- Use LspAttach autocommand to only map the following keys
--- after the language server attaches to the current buffer
-vim.api.nvim_create_autocmd("LspAttach", {
-  group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-  callback = function(ev)
-    -- Enable completion triggered by <c-x><c-o>
-    vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
-
-    -- Buffer local mappings.
-    -- See `:help vim.lsp.*` for documentation on any of the below functions
-    local opts = { buffer = ev.buf }
-    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-    vim.keymap.set("n", "<leader>m", vim.lsp.buf.hover, opts)
-    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-    vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
-    vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, opts)
-    vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, opts)
-    vim.keymap.set("n", "<space>wl", function()
-      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    end, opts)
-    vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, opts)
-    vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, opts)
-    vim.keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, opts)
-    vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-    vim.keymap.set("n", "<leader>,", function()
-      vim.lsp.buf.format({
-        async = true,
-        filter = function(client) return client.name ~= "tsserver" end
-      })
-    end, opts)
-  end,
-})
+-- lspconfig.eslint.setup({
+--   codeAction = {
+--     disableRuleComment = {
+--       enable = true,
+--       location = "separateLine"
+--     },
+--     showDocumentation = {
+--       enable = true
+--     }
+--   },
+--   codeActionOnSave = {
+--     enable = false,
+--     mode = "all"
+--   },
+--   experimental = {
+--     useFlatConfig = false
+--   },
+--   format = false,
+--   nodePath = "",
+--   onIgnoredFiles = "off",
+--   packageManager = "npm",
+--   problems = {
+--     shortenToSingleLine = false
+--   },
+--   quiet = false,
+--   rulesCustomizations = {},
+--   run = "onType",
+--   useESLintClass = false,
+--   validate = "on",
+--   workingDirectory = {
+--     mode = "location"
+--   }
+-- })
+-- lspconfig.emmet_ls.setup({})
+-- lspconfig.cssls.setup({
+--   capabilities = lspCapabilities,
+-- })
+-- lspconfig.csharp_ls.setup({})

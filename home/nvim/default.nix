@@ -17,8 +17,11 @@
       wget gcc zig unzip
       fd ripgrep tree-sitter
       trash-cli
+      nodejs
+      nodePackages.bash-language-server
       lua-language-server
       nixd
+      alejandra
     ];
   };
 }

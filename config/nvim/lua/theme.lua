@@ -1,86 +1,114 @@
-local lipPath = vim.fn.stdpath("data") .. "/site/lua/LIP.lua"
-if not vim.loop.fs_stat(lipPath) then
-  vim.fn.system({
-    "curl",
-   "-LJ",
-    "https://raw.githubusercontent.com/Dynodzzo/Lua_INI_Parser/master/LIP.lua",
-    "--create-dirs",
-    "-o",
-    lipPath,
-  })
-end
-
-local function getXdgConfigHome()
-  local envVar = "$XDG_CONFIG_HOME"
-  local configPath = vim.fn.expand("$XDG_CONFIG_HOME")
-  if envVar == configPath then
-    configPath = vim.fn.expand("~") .. "/.config/"
-  end
-  return configPath
-end
-
-local LIP = require("LIP")
-
-local ini = LIP.load(getXdgConfigHome() .. "/user/user.ini")
-local colors = ini.colors
+local helpers = require("helpers")
+local colors = require("user_ini").colors
 
 vim.cmd("colorscheme default")
 
 local bg = colors.black;
 local fg = colors.pureWhite;
 
-vim.api.nvim_set_hl(0, "Comment", { fg = colors.gray });
+helpers.set_hls_globally({
+  -- ["Statement"] = { fg = colors.blue },
+  ["Visual"] = { bg = colors.darkerGray },
+  ["Normal"] = { bg = bg, fg = fg },
+  ["NormalFloat"] = { link = "Pmenu" },
 
-vim.api.nvim_set_hl(0, "Statement", { fg = colors.blue });
-vim.api.nvim_set_hl(0, "Keyword", { fg = colors.lighterOrange });
-vim.api.nvim_set_hl(0, "Operator", { fg = colors.lighterOrange });
+  ["StatusLine"] = { bg = colors.lighterBlack },
+  ["StatusLineNC"] = { bg = colors.lightBlack },
+  -- status line
 
-vim.api.nvim_set_hl(0, "Special", { fg = colors.lightViolet });
-vim.api.nvim_set_hl(0, "Delimiter", { fg = colors.lightGray });
+  ["Pmenu"] = { bg = colors.lightestBlack },
+  ["PmenuSel"] = { link = "Visual" },
+  -- cmdline
 
-vim.api.nvim_set_hl(0, "String", { fg = colors.lightestGreen });
-vim.api.nvim_set_hl(0, "Number", { fg = colors.lightestGreen });
+  ["MsgArea"] = { link = "Pmenu" },
+  -- cmdline, pager
 
-vim.api.nvim_set_hl(0, "Function", { fg = colors.blue });
-vim.api.nvim_set_hl(0, "Identifier", { fg = fg });
+  ["LineNr"] = { fg = colors.gray },
+  ["LineNrAbove"] = { fg = colors.darkGray },
+  ["LineNrBelow"] = { link = "LineNrAbove" },
+  ["SignColumn"] = { link = "LineNr" },
+  -- line number, sign column
 
-vim.api.nvim_set_hl(0, "PreProc", { fg = colors.lightGray });
-vim.api.nvim_set_hl(0, "Include", { fg = colors.darkBlue });
-vim.api.nvim_set_hl(0, "Define", { fg = colors.darkBlue });
+  ["Search"] = { bg = colors.lightYellow, fg = bg },
+  ["CurSearch"] = { bg = colors.yellow, fg = bg },
 
--- vim.api.nvim_set_hl(0, "StorageClass", { fg = "" });
-vim.api.nvim_set_hl(0, "type", { fg = colors.lightViolet });
-vim.api.nvim_set_hl(0, "Structure", { fg = fg });
--- vim.api.nvim_set_hl(0, "Typedef", { fg = "" });
+  ["ColorColumn"] = { link = "StatusLineNC" },
+  -- ruler column
 
-vim.api.nvim_set_hl(0, "Visual", { bg = colors.darkerGray });
-vim.api.nvim_set_hl(0, "Normal", { bg = bg, fg = fg });
-vim.api.nvim_set_hl(0, "MatchParen", { link = "Visual" });
-vim.api.nvim_set_hl(0, "ColorColumn", { link = "StatusLineNC" });
-vim.api.nvim_set_hl(0, "Directory", { fg = colors.blue });
+  ["MatchParen"] = { link = "Visual" },
 
-vim.api.nvim_set_hl(0, "StatusLine", { bg = colors.lighterBlack });
-vim.api.nvim_set_hl(0, "StatusLineNC", { bg = colors.lightBlack });
+  ["Directory"] = { fg = colors.blue },
 
-vim.api.nvim_set_hl(0, "LineNr", { fg = colors.gray });
-vim.api.nvim_set_hl(0, "LineNrAbove", { fg = colors.darkGray });
-vim.api.nvim_set_hl(0, "LineNrBelow", { link = "LineNrAbove" });
-vim.api.nvim_set_hl(0, "SignColumn", { link = "LineNr" });
+  ["Error"] = { fg = colors.red },
+  ["Whitespace"] = { fg = colors.lightGray },
 
-vim.api.nvim_set_hl(0, "Pmenu", { bg = colors.lightestBlack });
-vim.api.nvim_set_hl(0, "PmenuSel", { link = "Visual" });
+  ["DiagnosticError"] = { link = "Error" },
+  ["DiagnosticWarn"] = { fg = colors.lighterOrange },
+  ["DiagnosticInfo"] = { fg = colors.darkBlue },
+  ["DiagnosticHint"] = { fg = colors.lightYellow },
+  ["DiagnosticOk"] = { fg = colors.green },
 
-vim.api.nvim_set_hl(0, "Search", { bg = colors.lightYellow, fg = bg });
-vim.api.nvim_set_hl(0, "CurSearch", { bg = colors.yellow, fg = bg });
-
-vim.api.nvim_set_hl(0, "Title", { fg = colors.pureWhite });
-vim.api.nvim_set_hl(0, "Todo", { bg = colors.lightestBlack });
-vim.api.nvim_set_hl(0, "Error", { fg = colors.red });
-
-vim.api.nvim_set_hl(0, "DiagnosticError", { link = "Error" });
-vim.api.nvim_set_hl(0, "DiagnosticWarn", { fg = colors.lightYellow });
-vim.api.nvim_set_hl(0, "DiagnosticInfo", { fg = colors.darkBlue });
-vim.api.nvim_set_hl(0, "DiagnosticHint", { fg = colors.blue });
-vim.api.nvim_set_hl(0, "DiagnosticOk", { fg = colors.green });
-
-vim.api.nvim_set_hl(0, "CmpItemKindDefault", { link = "Statement" });
+  -- TREESITTER
+  ["Comment"] = { fg = colors.gray },
+  -- @text.literal @comment
+  ["Identifier"] = { fg = fg },
+  -- @text.reference @parameter @field @property @variable @namespace
+  ["Title"] = { fg = colors.pureWhite },
+  -- @text.title
+  ["Underlined"] = {},
+  -- @text.uri @text.underline
+  ["Todo"] = { bg = colors.lightestBlack },
+  -- @text.todo
+  ["Delimiter"] = { fg = colors.lightGray },
+  -- @punctuation
+  ["Constant"] = {},
+  -- @constant
+  ["Special"] = { fg = colors.lightViolet },
+  -- @constant.builtin @function.builtin @constructor
+  ["Define"] = { fg = colors.darkBlue },
+  -- @constant.macro @define
+  ["Macro"] = {},
+  -- @macro @function.macro
+  ["String"] = { fg = colors.lightestGreen },
+  -- @string
+  ["SpecialChar"] = {},
+  -- @string.escape @string.special @character.special
+  ["Character"] = {},
+  -- @character
+  ["Number"] = { fg = colors.lightestGreen },
+  -- @number
+  ["Boolean"] = {},
+  -- @boolean
+  ["Float"] = {},
+  -- @float
+  ["Function"] = { fg = colors.blue },
+  -- @function @method
+  ["Conditional"] = {},
+  -- @conditional
+  ["Repeat"] = {},
+  -- @repeat
+  ["Label"] = {},
+  -- @label
+  ["Operator"] = { fg = colors.lighterOrange },
+  -- @operator
+  ["Keyword"] = { fg = colors.lighterOrange },
+  -- @keyword
+  ["Exception"] = {},
+  -- @exception
+  ["Type"] = { fg = colors.lightViolet },
+  -- @type
+  ["Typedef"] = {},
+  -- @type.definition
+  ["StorageClass"] = {},
+  -- @storageclass
+  ["Structure"] = { fg = fg },
+  -- @structure
+  ["Include"] = { fg = colors.darkBlue },
+  -- @include
+  ["PreProc"] = { fg = colors.lightGray },
+  -- @preproc
+  ["Debug"] = {},
+  -- @debug
+  ["Tag"] = {},
+  -- @tag
+})
