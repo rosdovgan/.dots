@@ -1,60 +1,112 @@
-{ pkgs, lib, c, user, env, colors, fonts, ... }:
-let
+{
+  pkgs,
+  lib,
+  c,
+  user,
+  env,
+  colors,
+  fonts,
+  ...
+}: let
   # TODO: Come up with something else
   private = let
-      repo = let env = import ../common/env.const.nix; in
-      builtins.fetchGit {
-      url = "file://" +  env.DOTS_PRIVATE_DIR;
-      rev = "fc1a7a285755f7b2345e993db6000d5626dc691a";
-    };
+    repo = let
+      env = import ../common/env.const.nix;
     in
+      builtins.fetchGit {
+        url = "file://" + env.DOTS_PRIVATE_DIR;
+        rev = "fc1a7a285755f7b2345e993db6000d5626dc691a";
+      };
+  in
     path: (lib.optional
       (builtins.pathExists (repo + path))
       (repo + path));
-in
-{
-  imports = [
-    ./gtk ./qt
+in {
+  imports =
+    [
+      ./gtk
+      ./qt
 
-    ./zsh ./direnv ./git ./fzf
+      ./zsh
+      ./direnv
+      ./git
+      ./fzf
 
-    ./xmonad ./xmobar ./stalonetray ./rofi ./dunst ./betterlockscreen
+      ./xmonad
+      ./xmobar
+      ./stalonetray
+      ./rofi
+      ./dunst
+      ./betterlockscreen
 
-    ./kitty ./nvim ./tmux
+      ./kitty
+      ./nvim
+      ./tmux
 
-    ./flameshot 
+      ./flameshot
 
-    ./firefox ./thunderbird ./krusader
+      ./firefox
+      ./thunderbird
+      ./krusader
 
-    ./udiskie
+      ./udiskie
 
-    ./conky
+      ./conky
 
-    ./gstreamer
-  ] ++ (private "/home/home.nix");
+      ./gstreamer
+    ]
+    ++ (private "/home/home.nix");
 
-  home.packages = with pkgs; [ 
-    nix-index  
+  home.packages = with pkgs; [
+    nix-index
     fd
-    lshw hwinfo dmidecode lm_sensors xorg.xwininfo xclip
-    pavucontrol alsa-utils
-    vlc gimp notepadqq peazip cinnamon.xreader
+
+    lshw
+    hwinfo
+    dmidecode
+    lm_sensors
+    xorg.xwininfo
+    xclip
+
+    pavucontrol
+    alsa-utils
+
+    vlc
+    gimp
+    notepadqq # peazip
+    cinnamon.xreader
+    qimgv
+    calibre
+
     ungoogled-chromium
     # chromium
-    htop qbittorrent keepassxc 
+
+    htop
+    qbittorrent
+    keepassxc
     gnome.gnome-clocks
-    flatpak bottles
-    telegram-desktop slack webcord
-    ventoy woeusb
-    gpick autokey
+
+    flatpak
+    bottles
+    dosbox-x
+
+    telegram-desktop
+    slack
+    webcord
+    zoom-us
+
+    ventoy
+    woeusb
+
+    gpick
+    autokey
+
     obs-studio
 
-    calibre
-    dosbox-x
     # ilspycmd
     # dotnet-sdk_7
     # csharp-ls
-    ];
+  ];
 
   services.screen-locker.xautolock.enable = false;
 
@@ -70,8 +122,8 @@ in
 
   xdg.configFile = {
     "floskell/config.json".source = /${c}/floskell/config.json;
-    "user/user.ini".source = 
-        (pkgs.formats.ini {}).generate "user.ini" { inherit colors fonts; };
+    "user/user.ini".source =
+      (pkgs.formats.ini {}).generate "user.ini" {inherit colors fonts;};
     "user/scripts".source = /${c}/user/scripts;
   };
 
@@ -90,13 +142,13 @@ in
   home.keyboard = {
     layout = "us,ua";
     variant = "rstu_ru";
-    options = [ "grp:lctrl_lshift_toggle" "caps:none" ];
+    options = ["grp:lctrl_lshift_toggle" "caps:none"];
   };
 
   home.username = user.name;
   home.homeDirectory = "/home/${user.name}";
 
-  # See the Home Manager release notes for a list of 
+  # See the Home Manager release notes for a list of
   # state version changes in each release.
   home.stateVersion = "23.11";
 }
