@@ -1,7 +1,5 @@
 { pkgs, users, ... }: {
   imports = [
-    ./system-packages-list.nix 
-
     ./nix-ld ./logind ./zsh
 
     ./xorg ./xmonad ./lightdm
@@ -68,6 +66,10 @@
       enable = true;
       block = [ "fakenews" "gambling" "porn" ];
     };
+  };
+
+  environment.shellAliases = {
+    nix-store-packages = "nix-store --query --requisites /run/current-system";
   };
 
   nix.settings = {
