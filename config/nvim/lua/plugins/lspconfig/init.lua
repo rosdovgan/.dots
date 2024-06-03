@@ -113,9 +113,12 @@ lspconfig.dartls.setup(shared_config)
 
 lspconfig.rust_analyzer.setup(helpers.merge_tables(shared_config, {
   settings = {
-    ['rust-analyzer'] = {
-      diagnostics = {
-        enable = false
+    ["rust-analyzer"] = {
+      procMacro = { enable = true },
+      cargo = { allFeatures = true },
+      checkOnSave = {
+        command = "clippy",
+        extraArgs = { "--no-deps" }
       }
     }
   }
