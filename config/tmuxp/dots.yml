@@ -1,0 +1,13 @@
+session_name: dots
+windows:
+- window_name: main
+  layout: main-vertical
+  start_directory: $DOTS_DIR
+  # TODO: It seems something wrong with kitty,
+  # so I have to add this to have clean panes
+  shell_command_before:
+  - cmd: clear
+    sleep_before: .3
+  panes:
+    - focus: true
+    - blank

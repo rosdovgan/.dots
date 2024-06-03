@@ -5,7 +5,7 @@
   colors,
   ...
 }: {
-  xdg.configFile."tmuxinator".source = /${c}/tmuxinator;
+  xdg.configFile."tmuxp".source = /${c}/tmuxp;
   programs.tmux = {
     enable = true;
     mouse = true;
@@ -20,7 +20,7 @@
         set -g status-style 'bg=${colors.darkBlue}'
       '';
     plugins = with pkgs.tmuxPlugins; [resurrect];
-    tmuxinator.enable = true;
+    tmuxp.enable = true;
   };
 
   programs.fzf.tmux.enableShellIntegration = config.programs.fzf.enable;

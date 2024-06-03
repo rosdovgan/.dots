@@ -1,0 +1,11 @@
+session_name: three
+windows:
+- window_name: main
+  layout: main-vertical
+  shell_command_before:
+  - cmd: clear
+    sleep_before: .3
+  panes:
+    - focus: true
+    - blank
+    - blank
