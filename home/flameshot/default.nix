@@ -2,8 +2,8 @@
   services.flameshot = {
     enable = true;
     settings.General = {
-      uiColor = colors.black;
-      contrastUiColor = colors.pureWhite;
+      uiColor = colors.blackT10;
+      contrastUiColor = colors.white;
 
       showStartupLaunchMessage = false;
       disabledTrayIcon = true;

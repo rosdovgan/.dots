@@ -9,14 +9,14 @@
         inherit (config.lib.formats.rasi) mkLiteral;
       in {
         "*" = {
-          lightblack = mkLiteral colors.lighterBlack;
+          lightblack = mkLiteral colors.blackT12;
           red = mkLiteral colors.red;
           green = mkLiteral colors.green;
-          blue = mkLiteral colors.darkBlue;
-          lightblue = mkLiteral colors.blue;
-          black = mkLiteral colors.pureBlack;
-          darkblack = mkLiteral colors.black;
-          white = mkLiteral colors.pureWhite;
+          blue = mkLiteral colors.beige;
+          lightblue = mkLiteral colors.cyanT40;
+          black = mkLiteral colors.black;
+          darkblack = mkLiteral colors.blackT10;
+          white = mkLiteral colors.white;
 
           text-color = mkLiteral "@white";
           background-color = mkLiteral "@darkblack";

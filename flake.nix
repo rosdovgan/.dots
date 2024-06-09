@@ -31,7 +31,7 @@
           r = /.;
           c = ./config;
           env = import common/env.const.nix;
-          colors = import common/colors.const.nix;
+          colors = import common/colors.const.nix { lib = nixpkgs.lib; };
           fonts = import common/fonts.const.nix;
         };
 

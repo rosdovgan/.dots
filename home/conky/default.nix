@@ -42,10 +42,10 @@
         use_spacer = "left",
         top_name_width = 15,
         own_window_hints = 'undecorated,sticky,skip_taskbar,skip_pager,below',
-        own_window_colour = "${colors.black}",
-        default_color = "${colors.pureWhite}",
-        color0 = "${colors.lightGray}",
-        color1 = "${colors.lighterGray}",
+        own_window_colour = "${colors.blackT10}",
+        default_color = "${colors.white}",
+        color0 = "${colors.grayS15}",
+        color1 = "${colors.grayT35}",
     }
 
     conky.text = [[

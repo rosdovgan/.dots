@@ -73,18 +73,18 @@ in
         font-size = 1.1em
         font-weight = regular
         font-style = normal
-        text-color = "${colors.pureWhite}"
+        text-color = "${colors.white}"
         error-color = "${colors.red}"
         background-image = ""
         background-image-size = auto
-        background-color = "${colors.pureBlack}"
-        window-color = "${colors.pureBlack}"
-        border-color = "${colors.pureBlack}"
+        background-color = "${colors.black}"
+        window-color = "${colors.black}"
+        border-color = "${colors.black}"
         border-width = 0px
         layout-space = 0
         password-character = -1
-        password-color = "${colors.pureWhite}"
-        password-background-color = "${colors.pureBlack}"
+        password-color = "${colors.white}"
+        password-background-color = "${colors.black}"
         password-border-radius = 0em
         '';
       };

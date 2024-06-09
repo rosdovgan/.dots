@@ -15,9 +15,9 @@
     extraConfig =
       builtins.readFile /${c}/tmux/tmux.conf
       + ''
-        set -g pane-border-style 'fg=${colors.pureWhite}'
-        set -g pane-active-border-style 'fg=${colors.darkBlue}'
-        set -g status-style 'bg=${colors.darkBlue}'
+        set -g pane-border-style 'fg=${colors.grayS15}'
+        set -g pane-active-border-style 'fg=${colors.beige}'
+        set -g status-style 'bg=${colors.beige} fg=${colors.black}'
       '';
     plugins = with pkgs.tmuxPlugins; [resurrect];
     tmuxp.enable = true;

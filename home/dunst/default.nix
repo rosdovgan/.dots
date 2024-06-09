@@ -7,14 +7,14 @@
         origin = "top-right";
         offset = "0x30";
         frame_width = 1;
-        frame_color = colors.black;
-        separator_color = colors.lightGray;
+        frame_color = colors.blackT10;
+        separator_color = colors.grayS15;
         separator_height = 1;
         padding = 10;
         horizontal_padding = 20;
         transparency = 10;
-        background = colors.black;
-        foreground = colors.pureWhite;
+        background = colors.blackT10;
+        foreground = colors.white;
       };
       urgency_low = {
         timeout = "5s";

@@ -229,9 +229,9 @@ myXmobarPP color =
     ppWindow :: String -> String
     ppWindow = xmobarRaw . (\w -> if null w then "untitled" else w) . shorten 20
 
-    white = xmobarColor (color "pureWhite") ""
+    white = xmobarColor (color "white") ""
     sel = xmobarColor selHex ""
-    dis = xmobarColor (color "lightGray") ""
-    warn = xmobarColor (color "lightYellow") ""
+    dis = xmobarColor (color "grayS15") ""
+    warn = xmobarColor (color "orangeT50") ""
     err = xmobarColor (color "red") ""
-    selHex = color "darkBlue"
+    selHex = color "beige"

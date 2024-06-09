@@ -17,7 +17,7 @@
   xsession = {
     enable = true;
     initExtra = ''
-      xsetroot -solid "${colors.pureBlack}"
+      xsetroot -solid "${colors.black}"
       xset -dpms
     '';
 

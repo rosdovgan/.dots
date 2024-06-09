@@ -29,8 +29,8 @@ config color fontStyle userScriptsDir =
           fontStyle "main8",
           fontStyle "main16"
         ],
-      bgColor = color "darkBlack",
-      fgColor = color "pureWhite",
+      bgColor = color "blackT06",
+      fgColor = color "white",
       overrideRedirect = True,
       lowerOnStart = True,
       position = TopHM 30 0 0 0 0,
@@ -90,7 +90,7 @@ myTemplate color userScriptsDir = "}" ++ left ++ "{" ++ right
       action "rofi -show power-menu -modi power-menu:rofi-power-menu" "1"
         . fn 5
         $ "\xf0425"
-    tray = fc (color "lighterBlack") $ tc "_XMONAD_TRAYPAD"
+    tray = fc (color "blackT12") $ tc "_XMONAD_TRAYPAD"
 
     notifyVolume cmd =
       unwords
@@ -172,7 +172,7 @@ myCommands color = Run UnsafeXMonadLog : monitors
             "--on",
             fn 2 $ volIcon ++ " <volume>" ++ fn 4 "%",
             "--onc",
-            color "pureWhite",
+            color "white",
             "--off",
             fc (color "red") . fn 2 $ volIconMute ++ " <volume>" ++ fn 4 "%",
             "--offc",
@@ -185,7 +185,7 @@ myCommands color = Run UnsafeXMonadLog : monitors
           ( concat
               [ fn 2 "%a %d.%m.%y ",
                 sep,
-                (action "gnome-clocks" "1" . fc (color "darkBlue")) " %H:%M"
+                (action "gnome-clocks" "1" . fc (color "beige")) " %H:%M"
               ]
           )
           "date"

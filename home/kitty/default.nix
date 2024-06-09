@@ -3,45 +3,88 @@
     enable = true;
     shellIntegration.enableZshIntegration = true;
     extraConfig = builtins.readFile /${c}/kitty/kitty.conf + ''
-      background                ${colors.black}
-      foreground                ${colors.pureWhite}
+      background                ${colors.blackT10}
+      foreground                ${colors.white}
 
-      selection_background      ${colors.lightBlack}
-      selection_foreground      ${colors.lighterGray}
+      selection_background      ${colors.blackT11}
+      selection_foreground      ${colors.grayT35}
 
-      url_color                 ${colors.darkBlue}
+      url_color                 ${colors.blue}
 
-      cursor                    ${colors.lighterGray}
-      cursor_text_color         ${colors.pureBlack}
+      cursor                    ${colors.grayT35}
+      cursor_text_color         ${colors.black}
 
-      active_border_color       ${colors.lightBlack}
-      inactive_border_color     ${colors.lightestBlack}
+      active_border_color       ${colors.blackT11}
+      inactive_border_color     ${colors.blackT17}
       bell_border_color         ${colors.red}
 
-      active_tab_background     ${colors.black}
-      active_tab_foreground     ${colors.white}
-      inactive_tab_background   ${colors.lightBlack}
-      inactive_tab_foreground   ${colors.lightGray}
+      active_tab_background     ${colors.blackT10}
+      active_tab_foreground     ${colors.whiteS01}
+      inactive_tab_background   ${colors.blackT11}
+      inactive_tab_foreground   ${colors.grayS15}
 
-      color0                    ${colors.pureBlack}
+      # Black
+      color0                    ${colors.black}
+      color8                    ${colors.grayS15}
+
+      # Red
       color1                    ${colors.red}
-      color2                    ${colors.green}
-      color3                    ${colors.yellow}
-      color4                    ${colors.cyan}
-      color5                    ${colors.yellow}
-      color6                    ${colors.blue}
-      color7                    ${colors.lighterGray}
+      color9                    ${colors.redT55}
 
-      color8                    ${colors.lightGray}
-      color9                    ${colors.lightRed}
-      color10                   ${colors.lighterGreen}
-      color11                   ${colors.lightYellow}
-      color12                   ${colors.lightGreen}
-      color13                   ${colors.lightYellow}
-      color14                   ${colors.lightBlue}
-      color15                   ${colors.white}
+      # Green
+      color2                    ${colors.green}
+      color10                   ${colors.greenT40}
+
+      # Yellow
+      color3                    ${colors.yellow}
+      color11                   ${colors.yellowT70}
+
+      # Blue
+      color4                    ${colors.blue}
+      color12                   ${colors.blueT60}
+
+      # Magenta
+      color5                    ${colors.orange}
+      color13                   ${colors.orangeT50}
+
+      # Cyan
+      color6                    ${colors.cyan}
+      color14                   ${colors.cyanT40}
+
+      # White
+      color7                    ${colors.grayT35}
+      color15                   ${colors.whiteS01}
     '';
   };
 }
-# color3                    ${colors.purple}
-# color11                   ${colors.lightPuple}
+# # Black
+# color0                    ${colors.black}
+# color8                    ${colors.grayS15}
+#
+# # Red
+# color1                    ${colors.red}
+# color9                    ${colors.lightRed}
+#
+# # Green
+# color2                    ${colors.green}
+# color10                   ${colors.lighterGreen}
+#
+# # Yellow
+# color3                    ${colors.yellow}
+# color11                   ${colors.lightYellow}
+#
+# # Blue
+# color4                    ${colors.cyan}
+# color12                   ${colors.lightGreen}
+#
+# # Magenta
+# color5                    ${colors.yellow}
+# color13                   ${colors.lightYellow}
+#
+# # Cyan
+# color6                    ${colors.blue}
+# color14                   ${colors.lightBlue}
+#
+# # White
+# color7                    ${colors.grayT35}
+# color15                   ${colors.whiteS01}

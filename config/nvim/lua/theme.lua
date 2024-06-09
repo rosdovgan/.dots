@@ -3,33 +3,33 @@ local colors = require("user_ini").colors
 
 vim.cmd("colorscheme default")
 
-local bg = colors.black;
-local fg = colors.pureWhite;
+local bg = colors.blackT10;
+local fg = colors.white;
 
 helpers.set_hls_globally({
   -- ["Statement"] = { fg = colors.blue },
-  ["Visual"] = { bg = colors.darkerGray },
+  ["Visual"] = { bg = colors.grayS65 },
   ["Normal"] = { bg = bg, fg = fg },
   ["NormalFloat"] = { link = "Pmenu" },
 
-  ["StatusLine"] = { bg = colors.lighterBlack },
-  ["StatusLineNC"] = { bg = colors.lightBlack },
+  ["StatusLine"] = { bg = colors.blackT12 },
+  ["StatusLineNC"] = { bg = colors.blackT11 },
   -- status line
 
-  ["Pmenu"] = { bg = colors.lightestBlack },
+  ["Pmenu"] = { bg = colors.blackT17 },
   ["PmenuSel"] = { link = "Visual" },
   -- cmdline
 
   ["MsgArea"] = { link = "Pmenu" },
   -- cmdline, pager
 
-  ["LineNr"] = { fg = colors.gray },
-  ["LineNrAbove"] = { fg = colors.darkGray },
+  ["LineNr"] = { fg = colors.grayS52 },
+  ["LineNrAbove"] = { fg = colors.grayS62 },
   ["LineNrBelow"] = { link = "LineNrAbove" },
   ["SignColumn"] = { link = "LineNr" },
   -- line number, sign column
 
-  ["Search"] = { bg = colors.lightYellow, fg = bg },
+  ["Search"] = { bg = colors.yellowT70, fg = bg },
   ["CurSearch"] = { bg = colors.yellow, fg = bg },
 
   ["ColorColumn"] = { link = "StatusLineNC" },
@@ -37,39 +37,39 @@ helpers.set_hls_globally({
 
   ["MatchParen"] = { link = "Visual" },
 
-  ["Directory"] = { fg = colors.blue },
+  ["Directory"] = { fg = colors.cyanT40 },
 
   ["Error"] = { fg = colors.red },
-  ["Whitespace"] = { fg = colors.lightGray },
+  ["Whitespace"] = { fg = colors.grayS15 },
 
   ["DiagnosticError"] = { link = "Error" },
-  ["DiagnosticWarn"] = { fg = colors.lighterOrange },
-  ["DiagnosticInfo"] = { fg = colors.darkBlue },
-  ["DiagnosticHint"] = { fg = colors.lightYellow },
+  ["DiagnosticWarn"] = { fg = colors.orangeT50 },
+  ["DiagnosticInfo"] = { fg = colors.cyanT40 },
+  ["DiagnosticHint"] = { fg = colors.yellowT70 },
   ["DiagnosticOk"] = { fg = colors.green },
 
   -- TREESITTER
-  ["Comment"] = { fg = colors.gray },
+  ["Comment"] = { fg = colors.grayS52 },
   -- @text.literal @comment
   ["Identifier"] = { fg = fg },
   -- @text.reference @parameter @field @property @variable @namespace
-  ["Title"] = { fg = colors.pureWhite },
+  ["Title"] = { fg = colors.white },
   -- @text.title
   ["Underlined"] = {},
   -- @text.uri @text.underline
-  ["Todo"] = { bg = colors.lightestBlack },
+  ["Todo"] = { bg = colors.blackT17 },
   -- @text.todo
-  ["Delimiter"] = { fg = colors.lightGray },
+  ["Delimiter"] = { fg = colors.grayS15 },
   -- @punctuation
   ["Constant"] = {},
   -- @constant
-  ["Special"] = { fg = colors.lightViolet },
+  ["Special"] = { fg = colors.lavender },
   -- @constant.builtin @function.builtin @constructor
-  ["Define"] = { fg = colors.darkBlue },
+  ["Define"] = { fg = colors.cyanT40 },
   -- @constant.macro @define
   ["Macro"] = {},
   -- @macro @function.macro
-  ["String"] = { fg = colors.lightestGreen },
+  ["String"] = { fg = colors.greenT80 },
   -- @string
   ["SpecialChar"] = {},
   -- @string.escape @string.special @character.special
@@ -81,7 +81,7 @@ helpers.set_hls_globally({
   -- @boolean
   ["Float"] = {},
   -- @float
-  ["Function"] = { fg = colors.blue },
+  ["Function"] = { fg = colors.cyanT40 },
   -- @function @method
   ["Conditional"] = {},
   -- @conditional
@@ -89,13 +89,13 @@ helpers.set_hls_globally({
   -- @repeat
   ["Label"] = {},
   -- @label
-  ["Operator"] = { fg = colors.lighterOrange },
+  ["Operator"] = { fg = colors.orangeT50 },
   -- @operator
-  ["Keyword"] = { fg = colors.lighterOrange },
+  ["Keyword"] = { fg = colors.orangeT50 },
   -- @keyword
   ["Exception"] = {},
   -- @exception
-  ["Type"] = { fg = colors.lightViolet },
+  ["Type"] = { fg = colors.lavender },
   -- @type
   ["Typedef"] = {},
   -- @type.definition
@@ -103,9 +103,9 @@ helpers.set_hls_globally({
   -- @storageclass
   ["Structure"] = { fg = fg },
   -- @structure
-  ["Include"] = { fg = colors.darkBlue },
+  ["Include"] = { fg = colors.cyanT40 },
   -- @include
-  ["PreProc"] = { fg = colors.lightGray },
+  ["PreProc"] = { fg = colors.grayS15 },
   -- @preproc
   ["Debug"] = {},
   -- @debug

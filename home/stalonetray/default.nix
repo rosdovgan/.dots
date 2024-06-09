@@ -8,7 +8,7 @@
   services.stalonetray = {
     enable = true;
     config = {
-      background = colors.lighterBlack;
+      background = colors.blackT12;
       geometry = "1x1-0+0";
       icon_size = 20;
       grow_gravity = "E";
