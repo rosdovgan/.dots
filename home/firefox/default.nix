@@ -12,6 +12,7 @@ let
     "browser.newtabpage.activity-stream.feeds.newtabinit" = false;
     "browser.newtabpage.activity-stream.default.sites" = "";
     "browser.urlbar.suggest.topsites" = false;
+    "browser.toolbars.bookmarks.visibility" = "newtab";
   };
 
   userStyling = {
