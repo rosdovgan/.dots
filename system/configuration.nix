@@ -30,7 +30,6 @@
   ];
 
   environment.systemPackages = with pkgs; [
-    where-is-my-sddm-theme
     neovim
     wget
     curl
