@@ -1,5 +1,11 @@
-{ pkgs, colors, ... }: {
-  home.packages = with pkgs; [ (conky.override ({ nvidiaSupport = true; })) ];
+{
+  pkgs,
+  colors,
+  ...
+}: {
+  home.packages = with pkgs; [
+    (conky.override {nvidiaSupport = true;})
+  ];
 
   xdg.configFile."conky/conky.conf".text = ''
     conky.config = {
@@ -51,25 +57,27 @@
     conky.text = [[
     ''${color0}Info:$color $nodename $kernel $machine
     ''${color0}Uptime:$color $uptime
-    ''${color0}Processes:$color ''${running_processes}/''${processes}
-    $hr                                                                   
-    ''${color0}CPU 1:$color ''${cpu cpu1}% ''${hwmon coretemp temp 2}°C $alignr ''${color0}CPU 2:$color ''${cpu cpu2}% ''${hwmon coretemp temp 3}°C 
-    ''${color0}CPU 3:$color ''${cpu cpu3}% ''${hwmon coretemp temp 4}°C $alignr ''${color0}CPU 4:$color ''${cpu cpu4}% ''${hwmon coretemp temp 5}°C 
-    ''${color0}CPU 5:$color ''${cpu cpu5}% ''${hwmon coretemp temp 6}°C $alignr ''${color0}CPU 6:$color ''${cpu cpu6}% ''${hwmon coretemp temp 7}°C 
+    ''${color0}Processes:$color ''${running_processes} /''${processes}
+    ''${color0}Disk usage:$color ''${fs_used} /''${fs_size}
+    ''${color0}Battery:$color ''${battery_short BAT1} ''${battery_time BAT1}
+    $hr
+    ''${color0}CPU 1:$color ''${cpu cpu1}% ''${hwmon coretemp temp 2}°C $alignr ''${color0}CPU 2:$color ''${cpu cpu2}% ''${hwmon coretemp temp 3}°C
+    ''${color0}CPU 3:$color ''${cpu cpu3}% ''${hwmon coretemp temp 4}°C $alignr ''${color0}CPU 4:$color ''${cpu cpu4}% ''${hwmon coretemp temp 5}°C
+    ''${color0}CPU 5:$color ''${cpu cpu5}% ''${hwmon coretemp temp 6}°C $alignr ''${color0}CPU 6:$color ''${cpu cpu6}% ''${hwmon coretemp temp 7}°C
     ''${color0}Frequency:$color ''${freq}MHz
     $hr
     ''${color0}RAM: $color $mem/$memmax
     ''${color0}Swap:$color $swap/$swapmax
     $hr
-    ''${color0}Nvidia GPU:$color ''${nvidia gpuutil}% ''${nvidia gputemp}°C 
+    ''${color0}Nvidia GPU:$color ''${nvidia gpuutil}% ''${nvidia gputemp}°C
     ''${color0}Frequency: $color ''${nvidia gpufreqcur}MHz
     $hr
-    ''${color}Name                 $alignr PID    CPU  MEM 
-    ''${color1}''${top name 1} $alignr ''${top pid 1} ''${top cpu 1} ''${top mem 1} 
-    ''${color1}''${top name 2} $alignr ''${top pid 2} ''${top cpu 2} ''${top mem 2} 
-    ''${color1}''${top name 3} $alignr ''${top pid 3} ''${top cpu 3} ''${top mem 3} 
-    ''${color1}''${top name 4} $alignr ''${top pid 4} ''${top cpu 4} ''${top mem 4} 
-    ''${color1}''${top name 5} $alignr ''${top pid 5} ''${top cpu 5} ''${top mem 5} 
+    ''${color}Name                 $alignr PID    CPU  MEM
+    ''${color1}''${top name 1} $alignr ''${top pid 1} ''${top cpu 1} ''${top mem 1}
+    ''${color1}''${top name 2} $alignr ''${top pid 2} ''${top cpu 2} ''${top mem 2}
+    ''${color1}''${top name 3} $alignr ''${top pid 3} ''${top cpu 3} ''${top mem 3}
+    ''${color1}''${top name 4} $alignr ''${top pid 4} ''${top cpu 4} ''${top mem 4}
+    ''${color1}''${top name 5} $alignr ''${top pid 5} ''${top cpu 5} ''${top mem 5}
     ]]
   '';
 }
