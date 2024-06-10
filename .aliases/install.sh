@@ -1,5 +1,6 @@
 #!/bin/sh
-ROOT="$(dirname $(dirname $(realpath ${BASH_SOURCE:-$0})))"
+ROOT=$(dirname "$( cd "$( dirname "$0" )" && pwd )")
 nix flake update --extra-experimental-features "nix-command flakes" \
-  $ROOT#main
-sudo nixos-install --flake $(dirname $0)#main
+  "$ROOT"#main
+
+sudo nixos-install --flake "$ROOT"#main

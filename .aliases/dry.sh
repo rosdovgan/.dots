@@ -1,3 +1,3 @@
 #!/bin/sh
-ROOT="$(dirname $(dirname $(realpath ${BASH_SOURCE:-$0})))"
-sudo nixos-rebuild dry-build --flake $ROOT#main
+ROOT=$(dirname "$( cd "$( dirname "$0" )" && pwd )")
+sudo nixos-rebuild dry-build --flake "$ROOT"#main
