@@ -15,7 +15,7 @@
     in
       builtins.fetchGit {
         url = "file://" + env.DOTS_PRIVATE_DIR;
-        rev = "fc1a7a285755f7b2345e993db6000d5626dc691a";
+        rev = "bb39c149047ea041c1af57745d5c78ef0e490b1e";
       };
   in
     path: (lib.optional
