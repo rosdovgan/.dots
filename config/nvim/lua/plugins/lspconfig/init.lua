@@ -98,15 +98,13 @@ lspconfig.nixd.setup(helpers.merge_tables(shared_config, {
 }))
 
 lspconfig.hls.setup(helpers.merge_tables(shared_config, {
-  cmd = { "haskell-language-server-wrapper", "--lsp" },
   filetypes = { "haskell", "lhaskell", "cabal" },
   settings = {
     haskell = {
       cabalFormattingProvider = "cabalfmt",
       formattingProvider = "ormolu"
     }
-  },
-  single_file_support = true
+  }
 }))
 
 lspconfig.dartls.setup(shared_config)
