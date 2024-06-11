@@ -29,6 +29,7 @@ import XMonad.Hooks.ManageDocks
     docks,
     manageDocks,
   )
+import XMonad.Hooks.ManageHelpers (doCenterFloat, isDialog, isInProperty)
 import XMonad.Hooks.PerWindowKbdLayout (perWindowKbdLayout)
 import XMonad.Hooks.SetWMName (setWMName)
 import XMonad.Hooks.StatusBar (defToggleStrutsKey, statusBarProp, withEasySB)
@@ -176,7 +177,7 @@ myKeys conf@(XConfig {XMonad.modMask = mm}) =
     audioNext = spawn "playerctl next"
     audioPrev = spawn "playerctl previous"
 
-    openTerminal = spawn . unwords $ [terminal conf,"-d", "$(xcwd)"]
+    openTerminal = spawn . unwords $ [terminal conf, "-d", "$(xcwd)"]
 
 myMouseBindings :: XConfig Layout -> M.Map (KeyMask, Button) (Window -> X ())
 myMouseBindings (XConfig {XMonad.modMask = mm}) =
@@ -199,7 +200,15 @@ myLayoutHook = toggleLayouts (avoidStruts Full) (avoidStruts $ tiled ||| Mirror 
     ratio = 1 / 2
     delta = 3 / 100
 
-myManageHook = manageDocks
+myManageHook =
+  composeAll
+    [ manageDocks,
+      isDialog --> doCenterFloat,
+      isInProperty
+        "_NET_WM_WINDOW_TYPE"
+        "_NET_WM_WINDOW_TYPE_SPLASH"
+        --> doCenterFloat
+    ]
 
 myLogHook :: X ()
 myLogHook = fadeWindowsLogHook myFadeHook
