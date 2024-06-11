@@ -79,6 +79,7 @@ in {
     calibre
 
     ungoogled-chromium
+    tor-browser
     # chromium
 
     htop
