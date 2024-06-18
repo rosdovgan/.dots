@@ -18,9 +18,10 @@
         packages = p : [
           p.xmonad-config
         ];
-        nativeBuildInputs = with pkgs; [ 
-          cabal-install
-          haskell-language-server
+        nativeBuildInputs = [
+          pkgs.cabal-install
+          pkgs.haskell-language-server
+          pkgs.haskellPackages.cabal-fmt
         ];
       };
     };

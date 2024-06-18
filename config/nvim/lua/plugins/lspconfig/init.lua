@@ -101,7 +101,7 @@ lspconfig.hls.setup(helpers.merge_tables(shared_config, {
   filetypes = { "haskell", "lhaskell", "cabal" },
   settings = {
     haskell = {
-      cabalFormattingProvider = "cabalfmt",
+      cabalFormattingProvider = "cabal-fmt",
       formattingProvider = "ormolu"
     }
   }
