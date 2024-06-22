@@ -20,7 +20,6 @@
 
     ./sound
     ./nvidia
-    ./opengl
 
     ./locate
 
@@ -64,6 +63,7 @@
 
   hardware.bluetooth.enable = true;
   hardware.brillo.enable = true;
+  hardware.graphics.enable = true;
 
   services.xserver.updateDbusEnvironment = true;
   services.libinput.enable = true; # Touchpad
