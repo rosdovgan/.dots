@@ -18,6 +18,11 @@
       sticky = true;
       window_layer = "bottom";
       log_level = "info";
+      decorations = "none";
+      transparent = false;
+      dockapp_mode = "none";
+      window_type = "dock";
+      skip_taskbar = true;
     };
   };
 
