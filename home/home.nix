@@ -74,7 +74,6 @@ in {
     vlc
     gimp
     notepadqq # peazip
-    cinnamon.xreader
     qimgv
     calibre
 
