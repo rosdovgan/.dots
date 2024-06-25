@@ -141,7 +141,7 @@ myCommands color = Run UnsafeXMonadLog : monitors
       Run $
         Battery
           [ "-t",
-            fn 2 "<acstatus> <left>" ++ fn 4 "%",
+            fn 2 "<acstatus> <left>" ++ fn 4 "%" ++ fn 2 " <watts>",
             "--",
             "-o",
             ' ' : batIcon,
