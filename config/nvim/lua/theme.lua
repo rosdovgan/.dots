@@ -39,7 +39,7 @@ helpers.set_hls_globally({
 
   ["Directory"] = { fg = colors.lightCyan },
 
-  ["Error"] = { fg = colors.neutralRed },
+  ["Error"] = { fg = colors.lightRed },
   ["Whitespace"] = { fg = colors.grayS15 },
 
   ["DiagnosticError"] = { link = "Error" },
