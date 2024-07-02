@@ -58,7 +58,7 @@ helpers.set_hls_globally({
   -- 2. Variables and Identifiers
   ["Identifier"] = { fg = colors.fg },
   -- @text.reference @parameter @field @property @variable @namespace
-  ["Constant"] = { fg = colors.grayS65 },
+  ["Constant"] = { fg = colors.grayS15 },
   -- @constant
 
   -- 3. Functions and Methods
@@ -112,7 +112,7 @@ helpers.set_hls_globally({
   -- @constant.macro @define
   ["Include"] = { fg = colors.lightPurple },
   -- @include
-  ["PreProc"] = { fg = colors.grayS52 },
+  ["PreProc"] = { fg = colors.grayS15 },
   -- @preproc
 
   -- 9. Text Formatting
