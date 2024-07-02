@@ -7,7 +7,10 @@
     else builtins.ceil x;
 
   rgbToHex = rgb: let
-    pad = x: if (lib.strings.stringLength x == 1) then "0${x}" else x;
+    pad = x:
+      if (lib.strings.stringLength x == 1)
+      then "0${x}"
+      else x;
     intToHex = x: pad (lib.toHexString x);
   in "#${intToHex rgb.r}${intToHex rgb.g}${intToHex rgb.b}";
 
@@ -52,76 +55,27 @@ in rec {
   gray = "#a9a9a9";
   grayT35 = tintHex gray 0.35;
 
-  beige = "#fffac8";
+  darkRed = "#B22222";
+  neutralRed = "#f31940";
+  lightRed = "#FA8072";
 
-  blue = "#4363d8";
-  blueT60 = tintHex blue 0.60;
+  darkGreen = "#2E8B57";
+  neutralGreen = "#38d06b";
+  lightGreen = "#C1FFC1";
 
-  cyan = "#42d4f4";
-  cyanT40 = tintHex cyan 0.40;
+  darkBlue = "#4682B4";
+  neutralBlue = "#6495ED";
+  lightBlue = "#87CEEB";
 
-  red = "#e6194B";
-  redT55 = tintHex red 0.55;
+  darkYellow = "#DAA520";
+  neutralYellow = "#FFDF00";
+  lightYellow = "#FFFACD";
 
-  orange = "#f58231";
-  orangeT50 = tintHex orange 0.50;
+  darkPurple = "#663399";
+  neutralPurple = "#8A2BE2";
+  lightPurple = "#D3A5E1";
 
-  yellow = "#ffe119";
-  yellowT70 = tintHex yellow 0.70;
-
-  green = "#3cb44b";
-  greenT40 = tintHex green 0.40;
-  greenT80 = tintHex green 0.80;
-
-  lavender = "#dcbeff";
-
-  purple = "#911eb4";
-  purpleT60 = tintHex purple 0.60;
-
-  White = "#ffffff";
-  Black = "#000000";
-  Red = "#e6194B";
-  Green = "#3cb44b";
-  Yellow = "#ffe119";
-  Blue = "#4363d8";
-  Orange = "#f58231";
-  Purple = "#911eb4";
-  Cyan = "#42d4f4";
-  Magenta = "#f032e6";
-  Lime = "#bfef45";
-  Pink = "#fabed4";
-  Teal = "#469990";
-  Lavender = "#dcbeff";
-  Brown = "#9A6324";
-  Beige = "#fffac8";
-  Maroon = "#800000";
-  Mint = "#aaffc3";
-  Olive = "#808000";
-  Apricot = "#ffd8b1";
-  Navy = "#000075";
-  Grey = "#a9a9a9";
-
-  # testS90 = shadeHex test 0.90;
-  # testS80 = shadeHex test 0.80;
-  # testS70 = shadeHex test 0.70;
-  # testS60 = shadeHex test 0.60;
-  # testS50 = shadeHex test 0.50;
-  # testS40 = shadeHex test 0.40;
-  # testS30 = shadeHex test 0.30;
-  # testS20 = shadeHex test 0.20;
-  # testS10 = shadeHex test 0.10;
-  # test = purple;
-  # testT10 = tintHex test 0.10;
-  # testT20 = tintHex test 0.20;
-  # testT30 = tintHex test 0.30;
-  # testT40 = tintHex test 0.40;
-  # testT50 = tintHex test 0.50;
-  # testT60 = tintHex test 0.60;
-  # testT70 = tintHex test 0.70;
-  # testT80 = tintHex test 0.80;
-  # testT90 = tintHex test 0.90;
-
-  # darkBlue = "#0085CC";
-  # blue = "#33b8ff";
-  # lightBlue = "#99c1f1";
+  darkCyan = "#008B8B";
+  neutralCyan = "#00CED1";
+  lightCyan = "#B0E0E6";
 }

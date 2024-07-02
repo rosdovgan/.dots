@@ -29,86 +29,105 @@ helpers.set_hls_globally({
   ["SignColumn"] = { link = "LineNr" },
   -- line number, sign column
 
-  ["Search"] = { bg = colors.yellowT70, fg = bg },
-  ["CurSearch"] = { bg = colors.yellow, fg = bg },
+  ["Search"] = { bg = colors.lightYellow, fg = bg },
+  ["CurSearch"] = { bg = colors.neutralYellow, fg = bg },
 
   ["ColorColumn"] = { link = "StatusLineNC" },
   -- ruler column
 
   ["MatchParen"] = { link = "Visual" },
 
-  ["Directory"] = { fg = colors.cyanT40 },
+  ["Directory"] = { fg = colors.lightCyan },
 
-  ["Error"] = { fg = colors.red },
+  ["Error"] = { fg = colors.neutralRed },
   ["Whitespace"] = { fg = colors.grayS15 },
 
   ["DiagnosticError"] = { link = "Error" },
-  ["DiagnosticWarn"] = { fg = colors.orangeT50 },
-  ["DiagnosticInfo"] = { fg = colors.cyanT40 },
-  ["DiagnosticHint"] = { fg = colors.yellowT70 },
-  ["DiagnosticOk"] = { fg = colors.green },
+  ["DiagnosticWarn"] = { fg = colors.lightYellow },
+  ["DiagnosticInfo"] = { fg = colors.lightCyan },
+  ["DiagnosticHint"] = { fg = colors.lightYellow },
+  ["DiagnosticOk"] = { fg = colors.lightGreen },
 
   -- TREESITTER
+  -- 1. Comments and Documentation
   ["Comment"] = { fg = colors.grayS52 },
   -- @text.literal @comment
-  ["Identifier"] = { fg = fg },
-  -- @text.reference @parameter @field @property @variable @namespace
-  ["Title"] = { fg = colors.white },
-  -- @text.title
-  ["Underlined"] = {},
-  -- @text.uri @text.underline
-  ["Todo"] = { bg = colors.blackT17 },
+  ["Todo"] = { fg = colors.grayS52 },
   -- @text.todo
+
+  -- 2. Variables and Identifiers
+  ["Identifier"] = { fg = colors.fg },
+  -- @text.reference @parameter @field @property @variable @namespace
+  ["Constant"] = { fg = colors.grayS65 },
+  -- @constant
+
+  -- 3. Functions and Methods
+  ["Function"] = { fg = colors.lightBlue },
+  -- @function @method
+  ["Macro"] = { fg = colors.lightRed },
+  -- @macro @function.macro
+  ["Special"] = { fg = colors.grayS15 },
+  -- @constant.builtin @function.builtin @constructor
+
+  -- 4. Keywords and Operators
+  ["Keyword"] = { fg = colors.lightGreen },
+  -- @keyword
+  ["Operator"] = { fg = colors.lightGreen },
+  -- @operator
+  ["Conditional"] = { fg = colors.lightGreen },
+  -- @conditional
+  ["Repeat"] = { fg = colors.lightGreen },
+  -- @repeat
+  ["Exception"] = { fg = colors.lightRed },
+  -- @exception
+
+  -- 5. Types and Structures
+  ["Type"] = { fg = colors.lightPurple },
+  -- @type
+  ["Typedef"] = { fg = colors.lightPurple },
+  -- @type.definition
+  ["StorageClass"] = { fg = colors.lightPurple },
+  -- @storageclass
+  ["Structure"] = { fg = colors.lightPurple },
+  -- @structure
+
+  -- 6. Literals
+  ["String"] = { fg = colors.lightYellow },
+  -- @string
+  ["Character"] = { fg = colors.lightRed },
+  -- @character
+  ["Number"] = { fg = colors.lightYellow },
+  -- @number
+  ["Boolean"] = { fg = colors.lightRed },
+  -- @boolean
+  ["Float"] = { fg = colors.lightYellow },
+  -- @float
+
+  -- 7. Punctuation and Delimiters
   ["Delimiter"] = { fg = colors.grayS15 },
   -- @punctuation
-  ["Constant"] = {},
-  -- @constant
-  ["Special"] = { fg = colors.lavender },
-  -- @constant.builtin @function.builtin @constructor
-  ["Define"] = { fg = colors.cyanT40 },
+
+  -- 8. Preprocessor and Includes
+  ["Define"] = { fg = colors.lightPurple },
   -- @constant.macro @define
-  ["Macro"] = {},
-  -- @macro @function.macro
-  ["String"] = { fg = colors.greenT80 },
-  -- @string
-  ["SpecialChar"] = {},
-  -- @string.escape @string.special @character.special
-  ["Character"] = {},
-  -- @character
-  ["Number"] = { fg = colors.lightestGreen },
-  -- @number
-  ["Boolean"] = {},
-  -- @boolean
-  ["Float"] = {},
-  -- @float
-  ["Function"] = { fg = colors.cyanT40 },
-  -- @function @method
-  ["Conditional"] = {},
-  -- @conditional
-  ["Repeat"] = {},
-  -- @repeat
-  ["Label"] = {},
-  -- @label
-  ["Operator"] = { fg = colors.orangeT50 },
-  -- @operator
-  ["Keyword"] = { fg = colors.orangeT50 },
-  -- @keyword
-  ["Exception"] = {},
-  -- @exception
-  ["Type"] = { fg = colors.lavender },
-  -- @type
-  ["Typedef"] = {},
-  -- @type.definition
-  ["StorageClass"] = {},
-  -- @storageclass
-  ["Structure"] = { fg = fg },
-  -- @structure
-  ["Include"] = { fg = colors.cyanT40 },
+  ["Include"] = { fg = colors.lightPurple },
   -- @include
-  ["PreProc"] = { fg = colors.grayS15 },
+  ["PreProc"] = { fg = colors.grayS52 },
   -- @preproc
-  ["Debug"] = {},
+
+  -- 9. Text Formatting
+  ["Title"] = { fg = colors.lightBlue },
+  -- @text.title
+  ["Underlined"] = { fg = colors.lightCyan },
+  -- @text.uri @text.underline
+
+  -- 10. Special Elements
+  ["SpecialChar"] = { fg = colors.lightRed },
+  -- @string.escape @string.special @character.special
+  ["Label"] = { fg = colors.lightCyan },
+  -- @label
+  ["Debug"] = { fg = colors.lightRed },
   -- @debug
-  ["Tag"] = {},
+  ["Tag"] = { fg = colors.lightPurple },
   -- @tag
 })

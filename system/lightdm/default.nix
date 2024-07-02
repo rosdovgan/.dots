@@ -74,7 +74,7 @@ in
         font-weight = regular
         font-style = normal
         text-color = "${colors.white}"
-        error-color = "${colors.red}"
+        error-color = "${colors.neutralRed}"
         background-image = ""
         background-image-size = auto
         background-color = "${colors.black}"

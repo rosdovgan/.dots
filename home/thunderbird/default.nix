@@ -20,7 +20,7 @@
     {
       "accounts": [
         {
-          "color": "${colors.red}",
+          "color": "${colors.neutralRed}",
           "path": "/home/${user.name}/.thunderbird/${user.name}/ImapMail/imap.gmail.com/INBOX.msf"
         }
       ],

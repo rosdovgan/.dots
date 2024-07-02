@@ -24,7 +24,7 @@
       };
       urgency_critical = {
         timeout = "30s";
-        frame_color = colors.red;
+        frame_color = colors.neutralRed;
       };
     };
   };

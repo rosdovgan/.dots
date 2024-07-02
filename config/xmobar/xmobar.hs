@@ -174,9 +174,9 @@ myCommands color = Run UnsafeXMonadLog : monitors
             "--onc",
             color "white",
             "--off",
-            fc (color "red") . fn 2 $ volIconMute ++ " <volume>" ++ fn 4 "%",
+            fc (color "neutralRed") . fn 2 $ volIconMute ++ " <volume>" ++ fn 4 "%",
             "--offc",
-            color "red"
+            color "neutralRed"
           ]
     kb = Run $ Kbd []
     dt =
@@ -185,7 +185,7 @@ myCommands color = Run UnsafeXMonadLog : monitors
           ( concat
               [ fn 2 "%a %d.%m.%y ",
                 sep,
-                (action "gnome-clocks" "1" . fc (color "beige")) " %H:%M"
+                (action "gnome-clocks" "1" . fc (color "lightBlue")) " %H:%M"
               ]
           )
           "date"

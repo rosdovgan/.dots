@@ -9,14 +9,14 @@
       selection_background      ${colors.blackT11}
       selection_foreground      ${colors.grayT35}
 
-      url_color                 ${colors.blue}
+      url_color                 ${colors.neutralBlue}
 
       cursor                    ${colors.grayT35}
       cursor_text_color         ${colors.black}
 
       active_border_color       ${colors.blackT11}
       inactive_border_color     ${colors.blackT17}
-      bell_border_color         ${colors.red}
+      bell_border_color         ${colors.neutralRed}
 
       active_tab_background     ${colors.blackT10}
       active_tab_foreground     ${colors.whiteS01}
@@ -28,28 +28,28 @@
       color8                    ${colors.grayS15}
 
       # Red
-      color1                    ${colors.red}
-      color9                    ${colors.redT55}
+      color9                    ${colors.neutralRed}
+      color1                    ${colors.lightRed}
 
       # Green
-      color2                    ${colors.green}
-      color10                   ${colors.greenT40}
+      color10                   ${colors.neutralGreen}
+      color2                    ${colors.lightGreen}
 
       # Yellow
-      color3                    ${colors.yellow}
-      color11                   ${colors.yellowT70}
+      color11                   ${colors.neutralYellow}
+      color3                    ${colors.lightYellow}
 
       # Blue
-      color4                    ${colors.blue}
-      color12                   ${colors.blueT60}
+      color12                   ${colors.neutralBlue}
+      color4                    ${colors.lightBlue}
 
       # Magenta
-      color5                    ${colors.orange}
-      color13                   ${colors.orangeT50}
+      color13                   ${colors.neutralPurple}
+      color5                    ${colors.lightPurple}
 
       # Cyan
-      color6                    ${colors.cyan}
-      color14                   ${colors.cyanT40}
+      color14                   ${colors.neutralCyan}
+      color6                    ${colors.lightCyan}
 
       # White
       color7                    ${colors.grayT35}

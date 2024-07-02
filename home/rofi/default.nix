@@ -10,10 +10,10 @@
       in {
         "*" = {
           lightblack = mkLiteral colors.blackT12;
-          red = mkLiteral colors.red;
-          green = mkLiteral colors.green;
-          blue = mkLiteral colors.beige;
-          lightblue = mkLiteral colors.cyanT40;
+          red = mkLiteral colors.neutralRed;
+          green = mkLiteral colors.neutralGreen;
+          blue = mkLiteral colors.neutralBlue;
+          lightblue = mkLiteral colors.lightBlue;
           black = mkLiteral colors.black;
           darkblack = mkLiteral colors.blackT10;
           white = mkLiteral colors.white;
