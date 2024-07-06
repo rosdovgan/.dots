@@ -3,3 +3,4 @@ config/xmobar/dist-newstyle
 config/xmonad/.direnv
 config/xmobar/.direnv
 config/nvim/lazy-lock.json
+.direnv

@@ -31,7 +31,7 @@
           r = /.;
           c = ./config;
           env = import common/env.const.nix;
-          colors = import common/colors.const.nix { lib = nixpkgs.lib; };
+          colors = import common/colors.const.nix {lib = nixpkgs.lib;};
           fonts = import common/fonts.const.nix;
         };
 
@@ -40,6 +40,16 @@
           nixd.overlays.default
         ];
       in {
+        devShells.x86_64-linux.default = let
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        in
+          pkgs.mkShell {
+            packages = with pkgs; [
+              nixd
+              alejandra
+            ];
+          };
+
         nixosConfigurations.main = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
