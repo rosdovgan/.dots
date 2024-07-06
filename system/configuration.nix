@@ -56,7 +56,7 @@
 
   services.thermald.enable = true;
   powerManagement.enable = true;
-  services.power-profiles-daemon.enable = true;
+  services.tlp.enable = true;
 
   services.flatpak.enable = true;
   services.udisks2.enable = true;
