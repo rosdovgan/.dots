@@ -41,6 +41,9 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.supportedFilesystems = ["ntfs"];
   boot.kernelModules = ["coretemp"];
+  boot.kernel.sysctl = {
+    "kernel.sysrq" = 1;
+  };
 
   security.allowSimultaneousMultithreading = false;
   boot.initrd.systemd.dbus.enable = true;
