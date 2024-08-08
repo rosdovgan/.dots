@@ -41,6 +41,7 @@ in {
 
       ./kitty
       ./nvim
+      ./helix
       ./tmux
 
       ./flameshot
