@@ -15,6 +15,12 @@
         transparency = 10;
         background = colors.blackT10;
         foreground = colors.white;
+
+        mouse_left_click = "close_current";
+        mouse_right_click = "do_action";
+        mouse_middle_click = "context";
+
+        history = "mod4+grave";
       };
       urgency_low = {
         timeout = "5s";
