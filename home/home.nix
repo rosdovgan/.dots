@@ -89,6 +89,10 @@ in {
 
     flatpak
     bottles
+    heroic
+    gamescope
+    gamemode
+
     dosbox-x
 
     telegram-desktop
