@@ -2,6 +2,8 @@
   # Load nvidia driver for Xorg and Wayland
   services.xserver.videoDrivers = ["nvidia"];
 
+  nixpkgs.config.nvidia.acceptLicense = true;
+
   hardware.nvidia = {
     # Modesetting is needed most of the time
     modesetting.enable = true;
@@ -30,6 +32,6 @@
     };
 
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    package = config.boot.kernelPackages.nvidiaPackages.legacy_535;
   };
 }
