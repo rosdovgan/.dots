@@ -76,6 +76,7 @@ in {
     gimp
     notepadqq # peazip
     qimgv
+    atool
     calibre
 
     ungoogled-chromium
