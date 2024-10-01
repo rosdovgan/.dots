@@ -86,7 +86,7 @@ in {
     htop
     qbittorrent
     keepassxc
-    gnome.gnome-clocks
+    gnome-clocks
 
     flatpak
     bottles
