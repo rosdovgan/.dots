@@ -48,6 +48,10 @@
               nixd
               alejandra
             ];
+
+            shellHook = ''
+              export ROOT=$(dirname "$(dirname "$out")")
+            '';
           };
 
         nixosConfigurations.main = nixpkgs.lib.nixosSystem {
