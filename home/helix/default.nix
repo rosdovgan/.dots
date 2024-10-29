@@ -32,6 +32,11 @@
           insert = "bar";
           select = "underline";
         };
+        indent-guides = {
+          render = true;
+          character = "⎸";
+          skip-levels = 1;
+        };
       };
 
       keys.normal = {
@@ -119,7 +124,10 @@
         "ui.cursorcolumn.secondary" = {bg = "gray";};
         "ui.virtual.ruler" = {bg = "gray";};
         "ui.virtual.whitespace" = "gray";
-        "ui.virtual.indent-guide" = "gray";
+        "ui.virtual.indent-guide" = {
+          fg = "gray";
+          modifiers = ["dim"];
+        };
         "ui.virtual.inlay-hint" = {
           fg = "white";
           bg = "gray";
