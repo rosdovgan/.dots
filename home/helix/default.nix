@@ -6,6 +6,7 @@
       editor = {
         lsp.display-messages = true;
         scrolloff = 999;
+        auto-format = true;
 
         statusline = {
           left = [
