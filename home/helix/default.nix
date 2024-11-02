@@ -40,7 +40,7 @@
       };
 
       keys.normal = {
-        space.space = "file_picker";
+        "," = "goto_word";
         esc = ["collapse_selection" "keep_primary_selection"];
       };
     };
