@@ -1,4 +1,4 @@
-session_name: two
+session_name: $TMUXP_SESSION_NAME
 windows:
 - window_name: main
   layout: main-vertical
