@@ -36,7 +36,7 @@
         };
 
         overlays = with inputs; [
-          nur.overlay
+          nur.overlays.default
           nixd.overlays.default
         ];
       in {

@@ -1,6 +1,6 @@
 { pkgs, colors, ... }: {
   home.packages = with pkgs; [ 
-    (nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; }) 
+    pkgs.nerd-fonts.droid-sans-mono
   ];
 
   fonts.fontconfig.enable = true;
