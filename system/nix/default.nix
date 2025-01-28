@@ -1,8 +1,15 @@
 {...}: {
   nix.gc = {
     automatic = true;
-    dates = "monthly";
-    options = "--delete-older-than 3month";
+    dates = "weekly";
+    options = "--delete-older-than 2w";
+    persistent = true;
+  };
+
+  nix.optimise = {
+    automatic = true;
+    dates = ["weekly"];
+    persistent = true;
   };
 
   nix.settings = {
