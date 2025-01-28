@@ -135,8 +135,8 @@ in {
 
   xsession.initExtra = ''
     telegram-desktop -startintray &
-    slack -u &
-    webcord -m &
+    # slack -u &
+    # webcord -m &
   '';
 
   home.sessionVariables = {
