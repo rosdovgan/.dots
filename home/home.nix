@@ -13,6 +13,7 @@
     ./gtk
     ./qt
 
+    ./ssh
     ./zsh
     ./direnv
     ./git
