@@ -1,0 +1,7 @@
+keys:
+  - &owner age1qwzdtznh6mp4u9ymc4lx9343np52gwrjet9vp0wtqw0gkcdkm92qvms9rm
+creation_rules:
+  - path_regex: secret/.*$
+    key_groups:
+      - age:
+          - *owner

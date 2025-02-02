@@ -24,6 +24,8 @@
 in {
   imports =
     [
+      ./sops
+
       ./gtk
       ./qt
 

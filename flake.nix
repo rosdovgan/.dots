@@ -5,6 +5,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    sops-nix.url = "github:Mic92/sops-nix";
     nur.url = "github:nix-community/NUR";
     nixd.url = "github:nix-community/nixd";
     flake-parts.url = "github:hercules-ci/flake-parts";
@@ -13,6 +14,7 @@
   outputs = inputs @ {
     nixpkgs,
     home-manager,
+    sops-nix,
     flake-parts,
     ...
   }:
@@ -28,7 +30,7 @@
           };
         };
         sharedArgs = {
-          r = /.;
+          r = ./.;
           c = ./config;
           env = import common/env.const.nix;
           colors = import common/colors.const.nix {lib = nixpkgs.lib;};
@@ -47,6 +49,7 @@
             packages = with pkgs; [
               nixd
               alejandra
+              sops
             ];
 
             shellHook = ''
@@ -74,7 +77,10 @@
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
-                users."${users.main.name}".imports = [./home/home.nix];
+                users."${users.main.name}".imports = [
+                  ./home/home.nix
+                  sops-nix.homeManagerModules.sops
+                ];
                 extraSpecialArgs = {user = users.main;} // sharedArgs;
               };
             }
@@ -87,7 +93,10 @@
           main = home-manager.lib.homeManagerConfiguration {
             pkgs = nixpkgs.legacyPackages.x86_64-linux // {inherit overlays;};
             extraSpecialArgs = {user = users.main;} // sharedArgs;
-            modules = [./home/home.nix];
+            modules = [
+              ./home/home.nix
+              sops-nix.homeManagerModules.sops
+            ];
           };
         };
       };
