@@ -50,6 +50,8 @@
               nixd
               alejandra
               sops
+              yaml-language-server
+              yamlfmt
             ];
 
             shellHook = ''

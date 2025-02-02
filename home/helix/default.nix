@@ -52,10 +52,18 @@
           language-servers = ["nixd"];
           formatter = {command = "alejandra";};
         }
+        {
+          name = "yaml";
+          formatter = {
+            command = "yamlfmt";
+            args = ["-"];
+          };
+        }
       ];
       language-server.nixd = {
         command = "nixd";
       };
+      language-server.yaml-language-server.config.yaml.format.enable = true;
     };
     themes = {
       custom = {
