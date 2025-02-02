@@ -1,4 +1,4 @@
-{ pkgs, lib, user, ... }:
+{ config, pkgs, lib, user, ... }:
 let
   general = {
     "sidebar.position_start" = false;
@@ -42,6 +42,11 @@ let
     "general.appversion.override" = "5.0 (Windows)";
     "general.platform.override" = "Win32";
     "general.oscpu.override" = "Windows NT 6.1";
+  };
+
+  bookmarks = {
+    "browser.bookmarks.file" = config.sops.secrets.firefoxBookmarks.path;
+    "browser.places.importBookmarksHTML" = true;
   };
 in
 {
@@ -162,6 +167,7 @@ in
       settings = lib.attrsets.mergeAttrsList [
         general
         userStyling
+        bookmarks
         ];
       extraConfig = lib.readFile (pkgs.fetchurl {
         url =

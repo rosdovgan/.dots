@@ -1,64 +1,47 @@
 {
   pkgs,
-  lib,
   c,
   user,
   env,
   colors,
   fonts,
   ...
-}: let
-  # TODO: Come up with something else
-  private = let
-    repo = let
-      env = import ../common/env.const.nix;
-    in
-      builtins.fetchGit {
-        url = "file://" + env.DOTS_PRIVATE_DIR;
-        rev = "bb39c149047ea041c1af57745d5c78ef0e490b1e";
-      };
-  in
-    path: (lib.optional
-      (builtins.pathExists (repo + path))
-      (repo + path));
-in {
-  imports =
-    [
-      ./sops
+}: {
+  imports = [
+    ./sops
 
-      ./gtk
-      ./qt
+    ./gtk
+    ./qt
 
-      ./zsh
-      ./direnv
-      ./git
-      ./fzf
+    ./zsh
+    ./direnv
+    ./git
+    ./fzf
 
-      ./xmonad
-      ./xmobar
-      ./stalonetray
-      ./rofi
-      ./dunst
-      ./betterlockscreen
+    ./xmonad
+    ./xmobar
+    ./stalonetray
+    ./rofi
+    ./dunst
+    ./betterlockscreen
 
-      ./kitty
-      ./nvim
-      ./helix
-      ./tmux
+    ./kitty
+    ./nvim
+    ./helix
+    ./tmux
 
-      ./flameshot
+    ./flameshot
 
-      ./firefox
-      ./thunderbird
-      ./krusader
+    ./firefox
+    ./thunderbird
+    ./krusader
 
-      ./udiskie
+    ./udiskie
 
-      ./conky
+    ./conky
 
-      ./gstreamer
-    ]
-    ++ (private "/home/home.nix");
+    ./gstreamer
+  ];
 
   home.packages = with pkgs; [
     nix-index
