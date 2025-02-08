@@ -46,8 +46,10 @@
     "kernel.sysrq" = 1;
   };
 
-  security.allowSimultaneousMultithreading = false;
+  boot.initrd.systemd.enable = true;
   boot.initrd.systemd.dbus.enable = true;
+
+  security.allowSimultaneousMultithreading = true;
 
   xdg.portal = {
     enable = true;
@@ -66,6 +68,7 @@
   services.udisks2.enable = true;
   services.upower.enable = true;
   services.blueman.enable = true;
+  services.dbus.enable = true;
 
   hardware.bluetooth.enable = true;
   hardware.brillo.enable = true;
