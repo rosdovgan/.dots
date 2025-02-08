@@ -44,6 +44,7 @@ import XMonad.Util.Hacks
   )
 import XMonad.Util.Loggers (logTitles)
 import XMonad.Util.Run (runInTerm)
+import XMonad.Layout.ResizableTile (ResizableTall(ResizableTall))
 
 main :: IO ()
 main = do
@@ -107,8 +108,8 @@ myKeys conf@(XConfig {XMonad.modMask = mm}) =
       ((mm .|. shiftMask, xK_h), windows W.swapUp),
       ((mm, xK_j), sendMessage Shrink),
       ((mm, xK_k), sendMessage Expand),
-      ((mm .|. shiftMask, xK_j), sendMessage MirrorShrink),
-      ((mm .|. shiftMask, xK_k), sendMessage MirrorExpand),
+      ((mm .|. controlMask, xK_j), sendMessage MirrorShrink),
+      ((mm .|. controlMask, xK_k), sendMessage MirrorExpand),
       ((mm, xK_t), withFocused $ windows . W.sink),
       -- , ((modMasmmk,               xK_comma ), sendMessage (IncMasterN 1))
       -- , ((mm,               xK_period), sendMessage (IncMasterN (-1)))
@@ -195,7 +196,7 @@ myMouseBindings (XConfig {XMonad.modMask = mm}) =
 
 myLayoutHook = toggleLayouts (avoidStruts Full) (avoidStruts $ tiled ||| Mirror tiled)
   where
-    tiled = Tall nmaster delta ratio
+    tiled = ResizableTall nmaster delta ratio []
     nmaster = 1
     ratio = 1 / 2
     delta = 3 / 100
