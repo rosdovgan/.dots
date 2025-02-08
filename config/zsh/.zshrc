@@ -1,5 +1,10 @@
+bindkey -e
+
 bindkey "''${key[Up]}" up-line-or-search
 bindkey '^ ' autosuggest-accept
+
+bindkey '^[[1;5D' backward-word    # Ctrl + Left -> Move left by word
+bindkey '^[[1;5C' forward-word     # Ctrl + Right -> Move right by word
 
 tmuxp() {
   local SESSION_NAME=$(basename "$PWD")
