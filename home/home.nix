@@ -31,6 +31,7 @@
     ./helix
 
     ./flameshot
+    ./mpv
 
     ./firefox
     ./thunderbird
