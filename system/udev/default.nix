@@ -1,4 +1,12 @@
 {...}: {
+  # Prevents immediate waking up by a weird usb keyboard behavior
+  services.udev.extraRules = builtins.concatStringsSep ", " [
+    ''ACTION=="add"''
+    ''ATTR{idVendor}=="c0f4"''
+    ''ATTR{idProduct}=="05c0"''
+    ''ATTR{power/wakeup}="disabled"''
+  ];
+
   # Swap escape and capslock keys
   services.udev.extraHwdb = ''
     evdev:atkbd:*
