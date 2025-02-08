@@ -54,6 +54,7 @@
     lm_sensors
     xorg.xwininfo
     xclip
+    shpool
 
     pavucontrol
     alsa-utils
