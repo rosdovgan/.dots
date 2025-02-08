@@ -19,6 +19,7 @@
 
     ./polkit
 
+    ./udev
     ./sound
     ./nvidia
 
