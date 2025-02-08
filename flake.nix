@@ -52,6 +52,7 @@
               sops
               yaml-language-server
               yamlfmt
+              bash-language-server
             ];
 
             shellHook = ''
