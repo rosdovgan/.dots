@@ -58,9 +58,7 @@
     pavucontrol
     alsa-utils
 
-    vlc
     gimp
-    qimgv
     atool
     calibre
 
