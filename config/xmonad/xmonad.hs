@@ -148,7 +148,7 @@ myKeys conf@(XConfig {XMonad.modMask = mm}) =
     runUserScript name args =
       let getScriptPath x = getXdgDirectory XdgConfig ("user/scripts/" ++ x)
        in liftIO (getScriptPath $ name ++ ' ' : unwords args) >>= spawn
-    openDotfiles = runInTerm "" "tmuxp load dots"
+    openDotfiles = spawn . unwords $ [terminal conf, "-d", "$DOTS_DIR"]
     toggleConky = runUserScript "toggle-conky.sh" []
     toggleBrightness = runUserScript "toggle-brightness.sh" []
     translateSelection lang = runUserScript "translate-selection.sh" [lang]
