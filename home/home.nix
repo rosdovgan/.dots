@@ -32,6 +32,7 @@
 
     ./flameshot
     ./mpv
+    ./aria2
 
     ./firefox
     ./thunderbird
@@ -68,7 +69,6 @@
     # chromium
 
     htop
-    qbittorrent
     keepassxc
     gnome-clocks
 
