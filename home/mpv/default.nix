@@ -9,6 +9,11 @@
       "Q" = "quit-watch-later";
       "p" = "show-progress";
       "ESC" = "set fullscreen no";
+      "MBTN_LEFT_DBL" = "cycle fullscreen";
+      "MBTN_BACK" = "playlist-prev";
+      "MBTN_FORWARD" = "playlist-next";
+      "WHEEL_UP" = "add volume 2";
+      "WHEEL_DOWN" = "add volume -2";
       "f" = "cycle fullscreen";
       "space" = "cycle pause";
       "j" = "add volume -10";
