@@ -127,6 +127,12 @@
     DOTS_DIR = env.DOTS_DIR;
   };
 
+  home.shellAliases = {
+    "ga" = "git add";
+    "gs" = "git status";
+    "gd" = "git diff";
+  };
+
   programs.home-manager.enable = true;
 
   home.keyboard = {
