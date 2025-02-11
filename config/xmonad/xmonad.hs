@@ -45,6 +45,7 @@ import XMonad.Util.Hacks
 import XMonad.Util.Loggers (logTitles)
 import XMonad.Util.Run (runInTerm)
 import XMonad.Layout.ResizableTile (ResizableTall(ResizableTall))
+import XMonad.Hooks.InsertPosition (insertPosition, Position (..), Focus (..))
 
 main :: IO ()
 main = do
@@ -203,7 +204,8 @@ myLayoutHook = toggleLayouts (avoidStruts Full) (avoidStruts $ tiled ||| Mirror 
 
 myManageHook =
   composeAll
-    [ manageDocks,
+    [ insertPosition Below Newer,
+      manageDocks,
       isDialog --> doCenterFloat,
       isInProperty
         "_NET_WM_WINDOW_TYPE"
