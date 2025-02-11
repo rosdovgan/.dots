@@ -92,13 +92,14 @@ myKeys conf@(XConfig {XMonad.modMask = mm}) =
   M.fromList $
     [ ((mm, xK_Return), openTerminal),
       ((mm, xK_d), openDotfiles),
+      ((mm, xK_n), openNotes),
       ((mm, xK_p), spawn "rofi -show drun -show-icons"),
       ((mm .|. shiftMask, xK_p), spawn "rofi -show run -show-icons"),
       ((mm, xK_w), spawn "rofi -show window"),
       ((mm, xK_c), kill),
       ((mm .|. shiftMask, xK_space), sendMessage NextLayout),
       ((mm, xK_f), sendMessage ToggleLayout),
-      ((mm, xK_n), refresh),
+      -- ((mm, xK_n), refresh),
       ((mm, xK_Tab), windows W.focusDown),
       ((mm .|. shiftMask, xK_Tab), windows W.focusUp),
       ((mm, xK_l), windows W.focusDown),
@@ -146,10 +147,13 @@ myKeys conf@(XConfig {XMonad.modMask = mm}) =
            ((shiftMask, xK_Print), spawn "gpick -s")
          ]
   where
+    userScriptPath name = getXdgDirectory XdgConfig ("user/scripts/" ++ name)
     runUserScript name args =
-      let getScriptPath x = getXdgDirectory XdgConfig ("user/scripts/" ++ x)
-       in liftIO (getScriptPath $ name ++ ' ' : unwords args) >>= spawn
+      liftIO (userScriptPath $ name ++ ' ' : unwords args) >>= spawn
+
     openDotfiles = spawn . unwords $ [terminal conf, "-d", "$DOTS_DIR"]
+    openNotes = (\x -> spawn . unwords $ [terminal conf, x])
+      =<< liftIO (userScriptPath "open-notes.sh")
     toggleConky = runUserScript "toggle-conky.sh" []
     toggleBrightness = runUserScript "toggle-brightness.sh" []
     translateSelection lang = runUserScript "translate-selection.sh" [lang]
