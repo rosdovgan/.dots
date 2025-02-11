@@ -12,7 +12,6 @@
 
   programs.neovim = {
     enable = true;
-    defaultEditor = true;
     extraPackages = with pkgs; [
       wget gcc zig unzip
       fd ripgrep tree-sitter
