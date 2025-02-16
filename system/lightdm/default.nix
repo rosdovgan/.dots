@@ -47,7 +47,7 @@ in
 
       greeters.mini = {
         enable = true;
-        user = users.main.name;
+        user = users.owner.name;
         extraConfig = ''
         [greeter]
         show-password-label = false

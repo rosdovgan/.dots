@@ -4,7 +4,7 @@
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
 
-  users.users."${users.main.name}" = {
+  users.users."${users.owner.name}" = {
     extraGroups = [ "libvirtd" ];
   };
 }

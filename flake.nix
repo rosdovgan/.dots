@@ -24,7 +24,7 @@
 
       flake = let
         users = {
-          main = {
+          owner = {
             name = "owner";
             description = "Owner";
           };
@@ -80,11 +80,11 @@
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
-                users."${users.main.name}".imports = [
+                users."${users.owner.name}".imports = [
                   ./home/home.nix
                   sops-nix.homeManagerModules.sops
                 ];
-                extraSpecialArgs = {user = users.main;} // sharedArgs;
+                extraSpecialArgs = {user = users.owner;} // sharedArgs;
               };
             }
           ];
@@ -95,7 +95,7 @@
         homeConfigurations = {
           main = home-manager.lib.homeManagerConfiguration {
             pkgs = nixpkgs.legacyPackages.x86_64-linux // {inherit overlays;};
-            extraSpecialArgs = {user = users.main;} // sharedArgs;
+            extraSpecialArgs = {user = users.owner;} // sharedArgs;
             modules = [
               ./home/home.nix
               sops-nix.homeManagerModules.sops

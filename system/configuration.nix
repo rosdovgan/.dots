@@ -100,9 +100,9 @@
       (builtins.readFile "/${c}/user/scripts/nix-repl-flake.sh");
   };
 
-  users.users."${users.main.name}" = {
+  users.users."${users.owner.name}" = {
     isNormalUser = true;
-    description = users.main.description;
+    description = users.owner.description;
     extraGroups = ["networkmanager" "audio" "video" "wheel" "plocate"];
     shell = pkgs.zsh;
   };
