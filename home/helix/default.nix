@@ -61,6 +61,12 @@
             args = ["-"];
           };
         }
+        {
+          name = "cabal";
+          formatter = {
+            command = "cabal-fmt";
+          };
+        }
       ];
       language-server.nixd = {
         command = "nixd";
