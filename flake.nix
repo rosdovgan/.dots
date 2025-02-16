@@ -37,6 +37,10 @@
           fonts = import common/fonts.const.nix;
         };
 
+        machines = {
+          main = {name = "main";};
+        };
+
         overlays = with inputs; [
           nur.overlays.default
           nixd.overlays.default
@@ -60,7 +64,7 @@
             '';
           };
 
-        nixosConfigurations.main = nixpkgs.lib.nixosSystem {
+        nixosConfigurations.${machines.main.name} = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
             {
@@ -72,7 +76,10 @@
 
             ./system/configuration.nix
             {
-              _module.args = {inherit users;} // sharedArgs;
+              _module.args =
+                {inherit users;}
+                // {machine = machines.main;}
+                // sharedArgs;
             }
 
             home-manager.nixosModules.home-manager
@@ -84,7 +91,12 @@
                   ./home/home.nix
                   sops-nix.homeManagerModules.sops
                 ];
-                extraSpecialArgs = {user = users.owner;} // sharedArgs;
+                extraSpecialArgs =
+                  {
+                    machine = machines.main;
+                    user = users.owner;
+                  }
+                  // sharedArgs;
               };
             }
           ];
@@ -95,7 +107,12 @@
         homeConfigurations = {
           main = home-manager.lib.homeManagerConfiguration {
             pkgs = nixpkgs.legacyPackages.x86_64-linux // {inherit overlays;};
-            extraSpecialArgs = {user = users.owner;} // sharedArgs;
+            extraSpecialArgs =
+              {
+                user = users.owner;
+                machine = machines.main;
+              }
+              // sharedArgs;
             modules = [
               ./home/home.nix
               sops-nix.homeManagerModules.sops
