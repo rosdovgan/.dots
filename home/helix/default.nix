@@ -240,5 +240,56 @@
         };
       };
     };
+
+    ignores = [
+      # Version control
+      ".git/"
+
+      # Build artifacts
+      "*.o"
+      "*.obj"
+      "*.so"
+      "*.dll"
+      "*.dylib"
+      "*.a"
+      "*.lib"
+      "*.exe"
+      "*.out"
+      "*.o"
+      "*.pdb"
+      "*.ilk"
+      "*.idb"
+      "*.tlog"
+      "*.gcda"
+      "*.gcno"
+
+      "*.hi"
+      "*.dyn_hi"
+      "*.dyn_o"
+
+      # Testing Artifacts & Coverage Files
+      "*.coverage"
+      ".pytest_cache/"
+      ".tox/"
+      ".nox/"
+
+      # Python-Specific Cache & Metadata
+      ".mypy_cache/"
+      ".coverage/"
+      "*.pyc"
+
+      # Build, Distribution, and Dependency Directories
+      "node_modules/"
+      "target/"
+      "dist/"
+      "dist-newstyle/"
+      ".stack-work/"
+      ".eggs/"
+      "elm-stuff/"
+      "build/"
+      "venv/"
+      "__pycache__/"
+      ".nox/"
+    ];
   };
 }
