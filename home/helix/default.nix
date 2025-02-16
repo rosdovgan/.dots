@@ -1,4 +1,8 @@
-{...}: {
+{
+  r,
+  machine,
+  ...
+}: {
   programs.helix = {
     enable = true;
     defaultEditor = true;
@@ -70,6 +74,14 @@
       ];
       language-server.nixd = {
         command = "nixd";
+        config.nixd.options = let
+          options =
+            "(builtins.getFlake \"${r}\")"
+            + ".nixosConfigurations.${machine.name}.options";
+        in {
+          nixos.expr = options;
+          home-manager.expr = options + ".home-manager.users.type.getSubOptions []";
+        };
       };
       language-server.yaml-language-server.config.yaml.format.enable = true;
     };

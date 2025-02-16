@@ -101,24 +101,6 @@
             }
           ];
         };
-
-        # This chunk exists only because nixd can't evaluate options
-        # You should't use it
-        homeConfigurations = {
-          main = home-manager.lib.homeManagerConfiguration {
-            pkgs = nixpkgs.legacyPackages.x86_64-linux // {inherit overlays;};
-            extraSpecialArgs =
-              {
-                user = users.owner;
-                machine = machines.main;
-              }
-              // sharedArgs;
-            modules = [
-              ./home/home.nix
-              sops-nix.homeManagerModules.sops
-            ];
-          };
-        };
       };
     };
 }
