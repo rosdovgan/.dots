@@ -176,6 +176,8 @@ in
         consent-o-matic
         proton-vpn
         betterttv
+        darkreader
+        leechblock-ng
        ];
 
       settings = lib.attrsets.mergeAttrsList [
