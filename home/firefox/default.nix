@@ -21,6 +21,8 @@ let
     "gfx.webrender.all" = true;
     "layout.css.backdrop-filter.enabled" = true;
     "svg.context-properties.content.enabled" = true;
+    "browser.tabs.inTitlebar" = 0;
+    "browser.theme.native-theme" = false;
   };
 
   clearOnClose = {
@@ -42,6 +44,18 @@ let
     "general.appversion.override" = "5.0 (Windows)";
     "general.platform.override" = "Win32";
     "general.oscpu.override" = "Windows NT 6.1";
+  };
+
+  sidebar = {
+    "sidebar.verticalTabs" = true;
+    "sidebar.revamp" = true;
+    "sidebar.visibility" = "expand-on-hover";
+    "sidebar.expandOnHover" = true;
+    "sidebar.animation.enabled" = false;
+    "sidebar.animation.duration-ms" = 0;
+    "sidebar.animation.expand-on-hover.duration-ms" = 0;
+    "sidebar.main.tools" = "history";
+    "toolkit.scrollbox.smoothScroll" = false;
   };
 
   bookmarks = {
@@ -156,10 +170,10 @@ in
         };
       };
 
+
       extensions = with pkgs.nur.repos.rycee.firefox-addons; [
         ublock-origin
         consent-o-matic
-        sidebery
         proton-vpn
         betterttv
        ];
@@ -167,21 +181,18 @@ in
       settings = lib.attrsets.mergeAttrsList [
         general
         userStyling
+        sidebar
         bookmarks
         ];
       extraConfig = lib.readFile (pkgs.fetchurl {
         url =
           "https://raw.githubusercontent.com/yokoffing/Betterfox/main/user.js";
         hash = "sha256-XME9G1LBbnj4DybzzDUP5iC0DDmwgNt0GP5r+Y+KILs=";
-      }) + ''
+ }) + ''
         user_pref("browser.search.suggest.enabled", true);
         user_pref("browser.newtabpage.enabled", false);
-      '';
-      userChrome = ''
-        #main-window:not([privatebrowsingmode="temporary"]) #TabsToolbar {
-          visibility: collapse;
-        }
       '';
     };
   };
 }
+
