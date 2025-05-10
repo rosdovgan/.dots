@@ -1,5 +1,10 @@
-{ config, pkgs, lib, user, ... }:
-let
+{
+  config,
+  pkgs,
+  lib,
+  user,
+  ...
+}: let
   general = {
     "sidebar.position_start" = false;
     "general.smoothScroll" = false;
@@ -38,8 +43,7 @@ let
   };
 
   userAgent = {
-    "general.useragent.override" =
-      "Mozilla/5.0 (Windows NT 6.1; rv:45.0) Gecko/20100101 Firefox/45.0";
+    "general.useragent.override" = "Mozilla/5.0 (Windows NT 6.1; rv:45.0) Gecko/20100101 Firefox/45.0";
     "general.appname.override" = "Netscape";
     "general.appversion.override" = "5.0 (Windows)";
     "general.platform.override" = "Win32";
@@ -62,139 +66,189 @@ let
     "browser.bookmarks.file" = config.sops.secrets.firefoxBookmarks.path;
     "browser.places.importBookmarksHTML" = true;
   };
-in
-{
+in {
   programs.firefox = {
     enable = true;
     profiles."${user.name}" = {
       isDefault = true;
 
       search = {
-        default = "Qwant";
-        privateDefault = "Qwant";
+        default = "qwant";
+        privateDefault = "qwant";
         force = true;
-        order = [ "Qwant" "DuckDuckGo" "Startpage" ];
+        order = ["qwant" "ddg" "Startpage"];
 
         engines = {
-          "Qwant" = {
-            urls = [{
-              template = "https://www.qwant.com";
-              params = [
-                { name = "q"; value = "{searchTerms}"; }
-                { name = "t"; value = "web"; }
-              ];
-            }];
-            iconUpdateURL = "https://www.qwant.com/public/"
+          qwant = {
+            urls = [
+              {
+                template = "https://www.qwant.com";
+                params = [
+                  {
+                    name = "q";
+                    value = "{searchTerms}";
+                  }
+                  {
+                    name = "t";
+                    value = "web";
+                  }
+                ];
+              }
+            ];
+            icon =
+              "https://www.qwant.com/public/"
               + "favicon-196.b2a1214ee3c261334512a377f1d678f7.png";
             updateInterval = 24 * 60 * 60 * 1000; # every day
-            definedAliases = [ "@q" ];
+            definedAliases = ["@q"];
           };
-          "DuckDuckGo".metaData.alias = "@ddg";
+          ddg.metaData.alias = "@ddg";
           "Startpage" = {
-            urls = [{
-              template = "https://www.startpage.com/do/dsearch";
-              params = [
-                { name = "q"; value = "{searchTerms}"; }
-                { name = "cat"; value = "web"; }
-                { name = "language"; value = "english"; }
-              ];
-            }];
-            iconUpdateURL = "https://www.startpage.com"
+            urls = [
+              {
+                template = "https://www.startpage.com/do/dsearch";
+                params = [
+                  {
+                    name = "q";
+                    value = "{searchTerms}";
+                  }
+                  {
+                    name = "cat";
+                    value = "web";
+                  }
+                  {
+                    name = "language";
+                    value = "english";
+                  }
+                ];
+              }
+            ];
+            icon =
+              "https://www.startpage.com"
               + "/sp/cdn/favicons/android-icon-192x192.png";
             updateInterval = 24 * 60 * 60 * 1000; # every day
-            definedAliases = [ "@sp" ];
+            definedAliases = ["@sp"];
           };
-          "YouTube" = {
-            urls = [{
-              template = "https://www.youtube.com/results";
-              params = [
-                { name = "search_query"; value = "{searchTerms}"; }
-              ];
-            }];
-            iconUpdateURL = "https://www.youtube.com"
+          youtube = {
+            urls = [
+              {
+                template = "https://www.youtube.com/results";
+                params = [
+                  {
+                    name = "search_query";
+                    value = "{searchTerms}";
+                  }
+                ];
+              }
+            ];
+            icon =
+              "https://www.youtube.com"
               + "/s/desktop/bcd251ee/img/favicon_144x144.png";
             updateInterval = 24 * 60 * 60 * 1000; # every day
-            definedAliases = [ "@yt" ];
+            definedAliases = ["@yt"];
           };
 
           "MyNixOS" = {
-            urls = [{
-              template = "https://mynixos.com/search";
-              params = [
-                { name = "q"; value = "{searchTerms}"; }
-              ];
-            }];
-            iconUpdateURL = "https://mynixos.com/favicon-dark.svg";
+            urls = [
+              {
+                template = "https://mynixos.com/search";
+                params = [
+                  {
+                    name = "q";
+                    value = "{searchTerms}";
+                  }
+                ];
+              }
+            ];
+            icon = "https://mynixos.com/favicon-dark.svg";
             updateInterval = 24 * 60 * 60 * 1000; # every day
-            definedAliases = [ "@mn" ];
+            definedAliases = ["@mn"];
           };
 
           "Nix Packages" = {
-            urls = [{
-              template = "https://search.nixos.org/packages";
-              params = [
-                { name = "type"; value = "packages"; }
-                { name = "query"; value = "{searchTerms}"; }
-              ];
-            }];
+            urls = [
+              {
+                template = "https://search.nixos.org/packages";
+                params = [
+                  {
+                    name = "type";
+                    value = "packages";
+                  }
+                  {
+                    name = "query";
+                    value = "{searchTerms}";
+                  }
+                ];
+              }
+            ];
 
-            icon = pkgs.nixos-icons
+            icon =
+              pkgs.nixos-icons
               + "/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-            definedAliases = [ "@np" ];
+            definedAliases = ["@np"];
           };
           "Nix Options" = {
-            urls = [{
-              template = "https://search.nixos.org/options";
-              params = [
-                { name = "type"; value = "options"; }
-                { name = "query"; value = "{searchTerms}"; }
-              ];
-            }];
+            urls = [
+              {
+                template = "https://search.nixos.org/options";
+                params = [
+                  {
+                    name = "type";
+                    value = "options";
+                  }
+                  {
+                    name = "query";
+                    value = "{searchTerms}";
+                  }
+                ];
+              }
+            ];
 
-            icon = pkgs.nixos-icons
+            icon =
+              pkgs.nixos-icons
               + "/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-            definedAliases = [ "@no" ];
+            definedAliases = ["@no"];
           };
           "NixOS Wiki" = {
-            urls = [{
-              template = "https://nixos.wiki/index.php?search={searchTerms}";
-              }];
-            iconUpdateURL = "https://nixos.wiki/favicon.png";
+            urls = [
+              {
+                template = "https://nixos.wiki/index.php?search={searchTerms}";
+              }
+            ];
+            icon = "https://nixos.wiki/favicon.png";
             updateInterval = 24 * 60 * 60 * 1000; # every day
-            definedAliases = [ "@nw" ];
+            definedAliases = ["@nw"];
           };
 
-          "Google".metaData.hidden = true;
-          "Bing".metaData.hidden = true;
-          "Amazon.com".metaData.hidden = true;
+          google.metaData.hidden = true;
+          bing.metaData.hidden = true;
+          amazondotcom.metaData.hidden = true;
         };
       };
 
-
-      extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+      extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
         ublock-origin
         consent-o-matic
         proton-vpn
         betterttv
         darkreader
         leechblock-ng
-       ];
+      ];
 
       settings = lib.attrsets.mergeAttrsList [
         general
         userStyling
         sidebar
         bookmarks
-        ];
-      extraConfig = lib.readFile (pkgs.fetchurl {
-        url =
-          "https://raw.githubusercontent.com/yokoffing/Betterfox/main/user.js";
-        hash = "sha256-oijc90r6Rg+C98wy1jmLdkuz6BmFhQve5VXr/gV0k60=";
- }) + ''
-        user_pref("browser.search.suggest.enabled", true);
-        user_pref("browser.newtabpage.enabled", false);
-      '';
+      ];
+      extraConfig =
+        lib.readFile (pkgs.fetchurl {
+          url = "https://raw.githubusercontent.com/yokoffing/Betterfox/main/user.js";
+          hash = "sha256-oijc90r6Rg+C98wy1jmLdkuz6BmFhQve5VXr/gV0k60=";
+        })
+        + ''
+          user_pref("browser.search.suggest.enabled", true);
+          user_pref("browser.newtabpage.enabled", false);
+        '';
     };
   };
 }
-

@@ -13,7 +13,7 @@
       size = 100000;
       path = "${config.xdg.dataHome}/zsh/history";
     };
-    initExtra = builtins.readFile /${c}/zsh/.zshrc;
+    initContent = builtins.readFile /${c}/zsh/.zshrc;
 
     plugins = [
       {
