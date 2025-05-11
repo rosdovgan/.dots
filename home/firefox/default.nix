@@ -249,6 +249,11 @@ in {
           user_pref("browser.search.suggest.enabled", true);
           user_pref("browser.newtabpage.enabled", false);
         '';
+      userChrome = ''
+        .tabbrowser-tab .tab-close-button {
+          visibility: collapse !important;
+        }
+      '';
     };
   };
 }
