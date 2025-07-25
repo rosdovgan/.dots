@@ -13,7 +13,6 @@
 
     ./xorg
     ./xmonad
-    ./lightdm
 
     ./binfmt
 
