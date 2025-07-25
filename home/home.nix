@@ -25,7 +25,7 @@
     ./stalonetray
     ./rofi
     ./dunst
-    ./betterlockscreen
+    # ./betterlockscreen
 
     ./kitty
     ./nvim
