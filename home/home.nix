@@ -96,6 +96,8 @@
     # ilspycmd
     # dotnet-sdk_7
     # csharp-ls
+
+    quickemu
   ];
 
   services.screen-locker.xautolock.enable = false;
