@@ -2,9 +2,13 @@
   environment.systemPackages = with pkgs; [ virtiofsd ];
 
   virtualisation.libvirtd.enable = true;
-  programs.virt-manager.enable = true;
+  services.samba.enable = true;
+  
+  boot.kernelModules = [ "kvm-amd" "kvm-intel" ];
+
+  # programs.virt-manager.enable = true;
 
   users.users."${users.owner.name}" = {
-    extraGroups = [ "libvirtd" ];
+    extraGroups = [ "libvirtd" "qemu-libvirtd" "libvirtd" ];
   };
 }
