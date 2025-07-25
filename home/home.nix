@@ -85,7 +85,7 @@
     webcord
     zoom-us
 
-    ventoy
+    # ventoy
     woeusb
 
     gpick
