@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   c,
   user,
@@ -133,6 +134,7 @@
     "ga" = "git add";
     "gs" = "git status";
     "gd" = "git diff";
+    "ns" = "/${config.xdg.configHome}/user/scripts/new-script.sh";
   };
 
   programs.home-manager.enable = true;
