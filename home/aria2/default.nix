@@ -28,6 +28,8 @@
 
       allow-overwrite = false;
       auto-save-interval = 60;
+
+      seed-ratio = 10;
     };
   };
 }
