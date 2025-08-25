@@ -74,7 +74,7 @@
     gnome-clocks
 
     flatpak
-    bottles
+    (bottles.override { removeWarningPopup = true; })
     heroic
     gamescope
     gamemode
