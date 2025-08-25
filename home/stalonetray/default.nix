@@ -1,5 +1,9 @@
-{ pkgs, colors, ... }: {
-  home.packages = with pkgs; [ 
+{
+  pkgs,
+  colors,
+  ...
+}: {
+  home.packages = with pkgs; [
     pkgs.nerd-fonts.droid-sans-mono
   ];
 
@@ -7,8 +11,8 @@
 
   services.stalonetray = {
     enable = true;
-    config = {
-      background = colors.blackT12;
+    config = with colors.cssHex; {
+      background = blackT12;
       geometry = "1x1-0+0";
       icon_size = 20;
       grow_gravity = "E";

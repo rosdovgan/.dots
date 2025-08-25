@@ -7,7 +7,7 @@
     (conky.override {nvidiaSupport = true;})
   ];
 
-  xdg.configFile."conky/conky.conf".text = ''
+  xdg.configFile."conky/conky.conf".text = with colors.cssHex; ''
     conky.config = {
         alignment = "middle_right",
         background = false,
@@ -48,10 +48,10 @@
         use_spacer = "left",
         top_name_width = 15,
         own_window_hints = 'undecorated,sticky,skip_taskbar,skip_pager,below',
-        own_window_colour = "${colors.blackT10}",
-        default_color = "${colors.white}",
-        color0 = "${colors.grayS15}",
-        color1 = "${colors.grayT35}",
+        own_window_colour = "${blackT10}",
+        default_color = "${white}",
+        color0 = "${grayS15}",
+        color1 = "${grayT35}",
     }
 
     conky.text = [[

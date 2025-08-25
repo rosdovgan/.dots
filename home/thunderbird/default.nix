@@ -1,12 +1,17 @@
-{ pkgs, user, colors, ... }: {
-  home.packages = with pkgs; [ birdtray ];
+{
+  pkgs,
+  user,
+  colors,
+  ...
+}: {
+  home.packages = with pkgs; [birdtray];
 
-  programs.thunderbird = { 
-    enable = true; 
+  programs.thunderbird = {
+    enable = true;
     profiles."${user.name}" = {
       isDefault = true;
       settings = {
-        "privacy.donottrackheader.enabled" = true; 
+        "privacy.donottrackheader.enabled" = true;
         "general.smoothScroll" = false;
       };
     };
@@ -16,11 +21,11 @@
     ${pkgs.birdtray}/bin/birdtray &
   '';
 
-  xdg.configFile."birdtray-config.json".text = ''
+  xdg.configFile."birdtray-config.json".text = with colors.cssHex; ''
     {
       "accounts": [
         {
-          "color": "${colors.neutralRed}",
+          "color": "${neutralRed}",
           "path": "/home/${user.name}/.thunderbird/${user.name}/ImapMail/imap.gmail.com/INBOX.msf"
         }
       ],
@@ -42,9 +47,9 @@
       "advanced/watchfiletimeout": 150,
       "common/allowsuppressingunread": false,
       "common/blinkspeed": 0,
-      "common/bordercolor": "${colors.white}",
+      "common/bordercolor": "${white}",
       "common/borderwidth": 0,
-      "common/defaultcolor": "${colors.white}",
+      "common/defaultcolor": "${white}",
       "common/exitthunderbirdonquit": true,
       "common/forceIgnoreUnreadEmailsOnMinimize": false,
       "common/hideWhenStartedManually": true,

@@ -1,9 +1,9 @@
-{ colors, ... }: {
+{colors, ...}: {
   services.flameshot = {
     enable = true;
-    settings.General = {
-      uiColor = colors.blackT10;
-      contrastUiColor = colors.white;
+    settings.General = with colors.cssHex; {
+      uiColor = blackT10;
+      contrastUiColor = white;
 
       showStartupLaunchMessage = false;
       disabledTrayIcon = true;

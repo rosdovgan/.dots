@@ -16,8 +16,8 @@
   services.picom.enable = true;
   xsession = {
     enable = true;
-    initExtra = ''
-      xsetroot -solid "${colors.black}"
+    initExtra = with colors.cssHex; ''
+      xsetroot -solid "${black}"
       xset -dpms
     '';
 

@@ -6,66 +6,66 @@
   programs.kitty = {
     enable = true;
     shellIntegration.enableZshIntegration = true;
-    extraConfig =
+    extraConfig = with colors.cssHex;
       builtins.readFile /${c}/kitty/kitty.conf
       + ''
-        background                ${colors.blackT10}
-        foreground                ${colors.white}
+        background                ${blackT10}
+        foreground                ${white}
 
-        selection_background      ${colors.blackT11}
-        selection_foreground      ${colors.grayT35}
+        selection_background      ${blackT11}
+        selection_foreground      ${grayT35}
 
-        url_color                 ${colors.neutralBlue}
+        url_color                 ${neutralBlue}
 
-        cursor                    ${colors.grayT35}
-        cursor_text_color         ${colors.black}
+        cursor                    ${grayT35}
+        cursor_text_color         ${black}
 
-        active_border_color       ${colors.blackT11}
-        inactive_border_color     ${colors.blackT17}
-        bell_border_color         ${colors.neutralRed}
+        active_border_color       ${blackT11}
+        inactive_border_color     ${blackT17}
+        bell_border_color         ${neutralRed}
 
-        active_tab_background     ${colors.blackT10}
-        active_tab_foreground     ${colors.whiteS01}
-        inactive_tab_background   ${colors.blackT11}
-        inactive_tab_foreground   ${colors.grayS15}
+        active_tab_background     ${blackT10}
+        active_tab_foreground     ${whiteS01}
+        inactive_tab_background   ${blackT11}
+        inactive_tab_foreground   ${grayS15}
 
         # Black
-        color0                    ${colors.black}
-        color8                    ${colors.grayS15}
+        color0                    ${black}
+        color8                    ${grayS15}
 
         # Red
-        color1                    ${colors.lightRed}
-        color9                    ${colors.lightRed}
-        # color9                    ${colors.neutralRed}
+        color1                    ${lightRed}
+        color9                    ${lightRed}
+        # color9                    ${neutralRed}
 
         # Green
-        color2                    ${colors.lightGreen}
-        color10                   ${colors.lightGreen}
-        # color10                   ${colors.neutralGreen}
+        color2                    ${lightGreen}
+        color10                   ${lightGreen}
+        # color10                   ${neutralGreen}
 
         # Yellow
-        color3                    ${colors.lightYellow}
-        color11                   ${colors.lightYellow}
-        # color11                   ${colors.neutralYellow}
+        color3                    ${lightYellow}
+        color11                   ${lightYellow}
+        # color11                   ${neutralYellow}
 
         # Blue
-        color4                    ${colors.lightBlue}
-        color12                   ${colors.lightBlue}
-        # color12                   ${colors.neutralBlue}
+        color4                    ${lightBlue}
+        color12                   ${lightBlue}
+        # color12                   ${neutralBlue}
 
         # Magenta
-        color5                    ${colors.lightPurple}
-        color13                   ${colors.lightPurple}
-        # color13                   ${colors.neutralPurple}
+        color5                    ${lightPurple}
+        color13                   ${lightPurple}
+        # color13                   ${neutralPurple}
 
         # Cyan
-        color6                    ${colors.lightCyan}
-        color14                   ${colors.lightCyan}
-        # color14                   ${colors.neutralCyan}
+        color6                    ${lightCyan}
+        color14                   ${lightCyan}
+        # color14                   ${neutralCyan}
 
         # White
-        color7                    ${colors.grayT35}
-        color15                   ${colors.whiteS01}
+        color7                    ${grayT35}
+        color15                   ${whiteS01}
       '';
   };
 }
