@@ -20,6 +20,7 @@
     ./git
     ./fzf
 
+    ./xorg
     ./xmonad
     ./xmobar
     ./stalonetray
@@ -119,19 +120,6 @@
       (pkgs.formats.ini {}).generate "user.ini" {colors = cssHex; inherit fonts;};
     "user/scripts".source = /${c}/user/scripts;
   };
-
-  xsession.initExtra = let
-    xsr = pkgs.xorg.xsetroot + /bin/xsetroot;
-  in ''
-    ${xsr} -cursor_name left_ptr
-    telegram-desktop -startintray &
-    # slack -u &
-    # webcord -m &
-  '';
-
-  home.file.".xinitrc".text = ''
-    exec ~/.xsession
-  '';
 
   home.sessionVariables = {
     DOTS_DIR = env.DOTS_DIR;
