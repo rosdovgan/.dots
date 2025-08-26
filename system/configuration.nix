@@ -6,6 +6,7 @@
 }: {
   imports = [
     ./nix
+    ./console
 
     ./nix-ld
     ./logind
