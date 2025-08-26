@@ -126,9 +126,6 @@
   };
 
   home.shellAliases = {
-    "ga" = "git add";
-    "gs" = "git status";
-    "gd" = "git diff";
     "ns" = "/${config.xdg.configHome}/user/scripts/new-script.sh";
   };
 
