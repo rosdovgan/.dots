@@ -50,6 +50,9 @@
 
   security.allowSimultaneousMultithreading = true;
 
+  # Required by home-manager xdg.portal.enable option
+  environment.pathsToLink = ["/share/xdg-desktop-portal" "/share/applications"];
+
   services.thermald.enable = true;
   powerManagement.enable = true;
   services.tlp.enable = true;

@@ -11,6 +11,7 @@
   imports = [
     ./sops
 
+    ./portal
     ./gtk
     ./qt
 
