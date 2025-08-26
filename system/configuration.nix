@@ -50,20 +50,10 @@
 
   security.allowSimultaneousMultithreading = true;
 
-  xdg.portal = {
-    enable = true;
-
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-gtk
-    ];
-    config = {common = {default = ["gtk"];};};
-  };
-
   services.thermald.enable = true;
   powerManagement.enable = true;
   services.tlp.enable = true;
 
-  services.flatpak.enable = true;
   services.udisks2.enable = true;
   services.upower.enable = true;
   services.blueman.enable = true;
