@@ -1,16 +1,14 @@
 {
   config,
   pkgs,
-  c,
   user,
   env,
-  colors,
-  fonts,
   ...
 }: {
   imports = [
     ./sops
 
+    ./xdg
     ./portal
     ./gtk
     ./qt
@@ -76,11 +74,10 @@
     gnome-clocks
 
     flatpak
-    (bottles.override { removeWarningPopup = true; })
+    (bottles.override {removeWarningPopup = true;})
     heroic
     gamescope
     gamemode
-
     dosbox-x
 
     telegram-desktop
@@ -113,13 +110,6 @@
       autoconnect = ["qemu:///system"];
       uris = ["qemu:///system"];
     };
-  };
-
-  xdg.configFile = {
-    "floskell/config.json".source = /${c}/floskell/config.json;
-    "user/user.ini".source = let inherit (colors) cssHex; in
-      (pkgs.formats.ini {}).generate "user.ini" {colors = cssHex; inherit fonts;};
-    "user/scripts".source = /${c}/user/scripts;
   };
 
   home.sessionVariables = {
