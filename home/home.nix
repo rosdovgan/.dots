@@ -9,6 +9,7 @@
     ./sops
 
     ./xdg
+    ./fonts
     ./portal
     ./gtk
     ./qt
@@ -19,25 +20,20 @@
     ./git
     ./fzf
 
-    ./xorg
-    ./xmonad
-    ./xmobar
-    ./stalonetray
-    ./rofi
+    ./hyprland
+    ./waybar
+    ./fuzzel
     ./dunst
-    # ./betterlockscreen
 
-    ./kitty
+    ./foot
     ./nvim
     ./helix
 
-    ./flameshot
     ./mpv
     ./aria2
 
     ./firefox
     ./thunderbird
-    ./krusader
 
     ./udiskie
 
@@ -54,8 +50,6 @@
     hwinfo
     dmidecode
     lm_sensors
-    xorg.xwininfo
-    xclip
     shpool
 
     pavucontrol
@@ -88,9 +82,6 @@
     # ventoy
     woeusb
 
-    gpick
-    autokey
-
     obs-studio
 
     # ilspycmd
@@ -99,8 +90,6 @@
 
     quickemu
   ];
-
-  services.screen-locker.xautolock.enable = false;
 
   services.network-manager-applet.enable = true;
   services.blueman-applet.enable = true;

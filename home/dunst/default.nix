@@ -9,7 +9,7 @@
       global = {
         font = fonts.main12;
         origin = "top-right";
-        offset = "0x30";
+        offset = "(0, 0)";
         frame_width = 1;
         frame_color = blackT10;
         separator_color = grayS15;

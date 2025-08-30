@@ -12,9 +12,6 @@
     ./logind
     ./zsh
 
-    ./xorg
-    ./xmonad
-
     ./binfmt
 
     ./polkit
@@ -50,6 +47,7 @@
   boot.initrd.systemd.dbus.enable = true;
 
   security.allowSimultaneousMultithreading = true;
+  security.pam.services.hyprlock = {};
 
   # Required by home-manager xdg.portal.enable option
   environment.pathsToLink = ["/share/xdg-desktop-portal" "/share/applications"];
