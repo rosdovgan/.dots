@@ -5,13 +5,13 @@
 }: {
   sops = {
     age.keyFile = "/home/${user.name}/.config/sops/age/keys.txt";
-    defaultSopsFile = /${r}/secret/default.yaml;
+    defaultSopsFile = /${r}/secrets/default.yaml;
     defaultSopsFormat = "yaml";
     secrets.favorite-color = {};
 
     secrets.firefoxBookmarks = {
       format = "binary";
-      sopsFile = /${r}/secret/firefox-bookmarks.html;
+      sopsFile = /${r}/secrets/firefox-bookmarks.html;
       key = "";
     };
   };
