@@ -87,19 +87,10 @@
     # ilspycmd
     # dotnet-sdk_7
     # csharp-ls
-
-    quickemu
   ];
 
   services.network-manager-applet.enable = true;
   services.blueman-applet.enable = true;
-
-  dconf.settings = {
-    "org/virt-manager/virt-manager/connections" = {
-      autoconnect = ["qemu:///system"];
-      uris = ["qemu:///system"];
-    };
-  };
 
   home.sessionVariables = {
     DOTS_DIR = env.DOTS_DIR;

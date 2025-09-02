@@ -24,8 +24,6 @@
 
     ./time-and-locale
 
-    ./virtualisation
-
     ./searxng
   ];
 
