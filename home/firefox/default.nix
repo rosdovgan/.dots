@@ -78,152 +78,91 @@ in {
         force = true;
         order = ["searxng" "qwant" "ddg" "Startpage"];
 
-        engines = {
+        engines = let
+          daily = 86400000;
+          nix-icon =
+            pkgs.nixos-icons
+            + "/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+        in {
           searxng = {
             urls = [
               {template = "http://localhost:49152/search?q={searchTerms}";}
             ];
             icon = "http://localhost:49152/favicon.ico";
-            updateInterval = 24 * 60 * 60 * 1000; # every day
+            updateInterval = daily;
             definedAliases = ["@s"];
           };
+
           qwant = {
             urls = [
-              {
-                template = "https://www.qwant.com";
-                params = [
-                  {
-                    name = "q";
-                    value = "{searchTerms}";
-                  }
-                  {
-                    name = "t";
-                    value = "web";
-                  }
-                ];
-              }
+              {template = "https://www.qwant.com/?q={searchTerms}";}
             ];
-            icon =
-              "https://www.qwant.com/public/"
-              + "favicon-196.b2a1214ee3c261334512a377f1d678f7.png";
-            updateInterval = 24 * 60 * 60 * 1000; # every day
+            icon = "https://www.qwant.com/favicon.ico";
+            updateInterval = daily;
             definedAliases = ["@q"];
           };
+
           ddg.metaData.alias = "@ddg";
-          "Startpage" = {
+
+          startpage = {
             urls = [
-              {
-                template = "https://www.startpage.com/do/dsearch";
-                params = [
-                  {
-                    name = "q";
-                    value = "{searchTerms}";
-                  }
-                  {
-                    name = "cat";
-                    value = "web";
-                  }
-                  {
-                    name = "language";
-                    value = "english";
-                  }
-                ];
-              }
+              {template = "https://www.startpage.com/do/dsearch?q={searchTerms}";}
             ];
-            icon =
-              "https://www.startpage.com"
-              + "/sp/cdn/favicons/android-icon-192x192.png";
-            updateInterval = 24 * 60 * 60 * 1000; # every day
+            icon = "https://www.startpage.com/favicon.ico";
+            updateInterval = daily;
             definedAliases = ["@sp"];
           };
+
           youtube = {
             urls = [
-              {
-                template = "https://www.youtube.com/results";
-                params = [
-                  {
-                    name = "search_query";
-                    value = "{searchTerms}";
-                  }
-                ];
-              }
+              {template = "https://www.youtube.com/results?search_query={searchTerms}";}
             ];
-            icon =
-              "https://www.youtube.com"
-              + "/s/desktop/bcd251ee/img/favicon_144x144.png";
-            updateInterval = 24 * 60 * 60 * 1000; # every day
+            icon = "https://www.youtube.com/favicon.ico";
+            updateInterval = daily;
             definedAliases = ["@yt"];
           };
 
           "MyNixOS" = {
             urls = [
-              {
-                template = "https://mynixos.com/search";
-                params = [
-                  {
-                    name = "q";
-                    value = "{searchTerms}";
-                  }
-                ];
-              }
+              {template = "https://mynixos.com/search?q={searchTerms}";}
             ];
             icon = "https://mynixos.com/favicon-dark.svg";
-            updateInterval = 24 * 60 * 60 * 1000; # every day
+            updateInterval = daily;
             definedAliases = ["@mn"];
           };
 
           "Nix Packages" = {
             urls = [
               {
-                template = "https://search.nixos.org/packages";
-                params = [
-                  {
-                    name = "type";
-                    value = "packages";
-                  }
-                  {
-                    name = "query";
-                    value = "{searchTerms}";
-                  }
-                ];
+                template =
+                  "https://search.nixos.org/packages"
+                  + "?type=options"
+                  + "&query={searchTerms}";
               }
             ];
-
-            icon =
-              pkgs.nixos-icons
-              + "/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+            icon = nix-icon;
             definedAliases = ["@np"];
           };
+
           "Nix Options" = {
             urls = [
               {
-                template = "https://search.nixos.org/options";
-                params = [
-                  {
-                    name = "type";
-                    value = "options";
-                  }
-                  {
-                    name = "query";
-                    value = "{searchTerms}";
-                  }
-                ];
+                template =
+                  "https://search.nixos.org/options"
+                  + "?type=options"
+                  + "&query={searchTerms}";
               }
             ];
-
-            icon =
-              pkgs.nixos-icons
-              + "/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+            icon = nix-icon;
             definedAliases = ["@no"];
           };
+
           "NixOS Wiki" = {
             urls = [
-              {
-                template = "https://nixos.wiki/index.php?search={searchTerms}";
-              }
+              {template = "https://nixos.wiki/index.php?search={searchTerms}";}
             ];
-            icon = "https://nixos.wiki/favicon.png";
-            updateInterval = 24 * 60 * 60 * 1000; # every day
+            icon = "https://nixos.wiki/favicon.ico";
+            updateInterval = daily;
             definedAliases = ["@nw"];
           };
 
