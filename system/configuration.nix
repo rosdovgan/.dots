@@ -25,6 +25,8 @@
     ./time-and-locale
 
     ./virtualisation
+
+    ./searxng
   ];
 
   environment.systemPackages = with pkgs; [

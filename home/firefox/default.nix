@@ -73,12 +73,20 @@ in {
       isDefault = true;
 
       search = {
-        default = "qwant";
-        privateDefault = "qwant";
+        default = "searxng";
+        privateDefault = "searxng";
         force = true;
-        order = ["qwant" "ddg" "Startpage"];
+        order = ["searxng" "qwant" "ddg" "Startpage"];
 
         engines = {
+          searxng = {
+            urls = [
+              {template = "http://localhost:49152/search?q={searchTerms}";}
+            ];
+            icon = "http://localhost:49152/favicon.ico";
+            updateInterval = 24 * 60 * 60 * 1000; # every day
+            definedAliases = ["@s"];
+          };
           qwant = {
             urls = [
               {
