@@ -1,10 +1,14 @@
-{
+args @ {
   config,
   pkgs,
   user,
   env,
   ...
-}: {
+}: let
+  scripts = (import ./scripts) args;
+in {
+  _module.args = {inherit scripts;};
+
   imports = [
     ./sops
 
@@ -97,7 +101,9 @@
   };
 
   home.shellAliases = {
-    "ns" = "/${config.xdg.configHome}/user/scripts/new-script.sh";
+    nix-store-packages = "nix-store --query --requisites /run/current-system";
+    nix-repl-flake = scripts.nix-repl-flake;
+    "ns" = scripts.new-script;
   };
 
   programs.home-manager.enable = true;

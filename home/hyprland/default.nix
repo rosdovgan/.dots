@@ -2,10 +2,10 @@
   config,
   pkgs,
   colors,
+  scripts,
   ...
 }: {
   home.packages = with pkgs; [
-    libnotify
     wl-clipboard
   ];
 
@@ -18,42 +18,15 @@
     xwayland.enable = true;
     systemd.enable = true;
     extraConfig = let
-      wpctl = "${pkgs.wireplumber}/bin/wpctl";
-      brillo = "${pkgs.brillo}/bin/brillo";
       playerctl = "${pkgs.playerctl}/bin/playerctl";
 
       m = "SUPER";
       terminal = "${pkgs.foot}/bin/foot";
 
-      userScriptPath = name: "${config.xdg.configHome}/user/scripts/${name}.sh";
-
-      notifyBrightness = x: "${x} && ${userScriptPath "notify-brightness-level"}";
-      brightnessUp = notifyBrightness "${brillo} -A 25";
-      brightnessDown = notifyBrightness "${brillo} -U 25";
-
-      notifySound = x: "${x} && ${userScriptPath "notify-sound-volume-level"}";
-      raiseVolume = notifySound "${wpctl} set-volume @DEFAULT_SINK@ 10%+";
-      lowerVolume = notifySound "${wpctl} set-volume @DEFAULT_SINK@ 10%-";
-      muteVolume = notifySound "${wpctl} set-mute @DEFAULT_SINK@ toggle";
-
       audioPlay = "${playerctl} play";
       audioStop = "${playerctl} pause";
       audioNext = "${playerctl} next";
       audioPrev = "${playerctl} previous";
-
-      screenshot = let
-        wayfreeze = "${pkgs.wayfreeze}/bin/wayfreeze";
-        slurp = "${pkgs.slurp}/bin/slurp";
-        grim = "${pkgs.grim}/bin/grim";
-        wl-copy = "${pkgs.wl-clipboard}/bin/wl-copy";
-        tee = "${pkgs.coreutils}/bin/tee";
-      in
-        pkgs.writeScript "wl-screenshot" ''
-          ${wayfreeze} & PID=$!;
-          sleep .1;
-          ${slurp} | ${grim} -g - - | ${tee} ~/Pictures/$(date +%s).png | ${wl-copy};
-          kill $PID
-        '';
     in
       with colors.rgbHex; ''
         # Refer to the wiki for more information.
@@ -136,9 +109,8 @@
 
         bind = ${m}, return, exec, ${terminal}
         bind = ${m}, D, exec, ${terminal} -D "$DOTS_DIR"
-        # bind = ${m}, N, exec, ${terminal} ${userScriptPath "open-notes"}
-        bind = ${m}, M, exec, ${userScriptPath "toggle-conky"}
-        bind = , print, exec, ${screenshot}
+        bind = ${m}, M, exec, ${scripts.toggle-conky} "conky"
+        bind = , print, exec, ${scripts.wl-screenshot}
         bind = ${m}, Q, killactive,
         bind = ${m} SHIFT, Q, exit,
         bind = ${m}, space, togglefloating,
@@ -196,12 +168,14 @@
         bindm = ${m}, mouse:273, resizewindow
 
         # Laptop multimedia keys for volume and LCD brightness
-        bindel = ,XF86AudioRaiseVolume, exec, ${raiseVolume}
-        bindel = ,XF86AudioLowerVolume, exec, ${lowerVolume}
-        bindl = ,XF86AudioMute, exec, ${muteVolume}
-        bindel = ,XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
-        bindel = ,XF86MonBrightnessUp, exec, ${brightnessUp}
-        bindel = ,XF86MonBrightnessDown, exec, ${brightnessDown}
+        bindel = ,XF86AudioRaiseVolume, exec, ${scripts.raise-speaker-volume}
+        bindel = ,XF86AudioLowerVolume, exec, ${scripts.lower-speaker-volume}
+        bindl = ,XF86AudioMute, exec, ${scripts.mute-speaker}
+        bindel = ${m}, XF86AudioRaiseVolume, exec, ${scripts.raise-mic-volume}
+        bindel = ${m}, XF86AudioLowerVolume, exec, ${scripts.lower-mic-volume}
+        bindl = ${m}, XF86AudioMute, exec, ${scripts.mute-mic}
+        bindel = ,XF86MonBrightnessUp, exec, ${scripts.increase-brightness}
+        bindel = ,XF86MonBrightnessDown, exec, ${scripts.decrease-brightness}
         bindl = ,XF86PowerOff, dpms, toggle
 
         # Requires playerctl

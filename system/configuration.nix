@@ -84,13 +84,6 @@
     };
   };
 
-  environment.shellAliases = {
-    nix-store-packages = "nix-store --query --requisites /run/current-system";
-    nix-repl-flake =
-      pkgs.writeScript "nix-repl-flake"
-      (builtins.readFile "/${c}/user/scripts/nix-repl-flake.sh");
-  };
-
   users.users."${users.owner.name}" = {
     isNormalUser = true;
     description = users.owner.description;

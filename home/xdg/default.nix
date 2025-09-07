@@ -14,6 +14,5 @@
         colors = cssHex;
         inherit fonts;
       };
-    "user/scripts".source = /${c}/user/scripts;
   };
 }

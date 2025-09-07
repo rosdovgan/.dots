@@ -1,6 +1,7 @@
 {
   pkgs,
   colors,
+  scripts,
   ...
 }: {
   home.packages = with pkgs; [
@@ -10,9 +11,7 @@
   programs.waybar = {
     enable = true;
     systemd.enable = true;
-    settings.main = with colors.cssHex; let
-      wpctl = "${pkgs.wireplumber}/bin/wpctl";
-    in {
+    settings.main = with colors.cssHex; {
       layer = "top";
       position = "top";
       height = 30;
@@ -49,7 +48,9 @@
 
       cpu.format = "<span size=\"2000\"> </span>{usage}%";
 
-      memory.format = "<span size=\"5000\"> </span>{used:0.1f}/{total:0.1f}<small>GiB</small>";
+      memory.format =
+        "<span size=\"5000\"> </span>"
+        + "{used:0.1f}/{total:0.1f}<small>GiB</small>";
 
       battery = {
         interval = "10";
@@ -61,6 +62,8 @@
         format = "󰃠<span size=\"1000\"> </span>{percent}%";
         tooltip-format = "{percent}%";
         scroll-step = 25;
+        on-scroll-up = scripts.increase-brightness;
+        on-scroll-down = scripts.decrease-brightness;
       };
 
       "pulseaudio#sink" = {
@@ -69,7 +72,9 @@
         format-source = "󰍬 {volume}%";
         format-source-muted = "󰍭 {volume}%";
         scroll-step = 10;
-        on-click-middle = "${wpctl} set-mute @DEFAULT_SINK@ toggle";
+        on-scroll-up = scripts.raise-speaker-volume;
+        on-scroll-down = scripts.lower-speaker-volume;
+        on-click-middle = scripts.mute-speaker;
       };
 
       "pulseaudio#source" = {
@@ -78,9 +83,9 @@
         format-source = "󰍬{volume}%";
         format-source-muted = "󰍭{volume}%";
         tooltip = false;
-        on-scroll-up = "${wpctl} set-volume @DEFAULT_SOURCE@ 10%+";
-        on-scroll-down = "${wpctl} set-volume @DEFAULT_SOURCE@ 10%-";
-        on-click-middle = "${wpctl} set-mute @DEFAULT_SOURCE@ toggle";
+        on-scroll-up = scripts.raise-mic-volume;
+        on-scroll-down = scripts.lower-mic-volume;
+        on-click-middle = scripts.mute-mic;
       };
 
       clock = {
